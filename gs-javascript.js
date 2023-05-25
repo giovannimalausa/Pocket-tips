@@ -73,7 +73,7 @@ let overable = true;
 // BLUE
 let enterBlue = gsap.to(blueCard, { // Animazione card blu
     paused: true,
-    y: -100,
+    y: -125,
     duration: 0.3,
     ease: "power3",
 })
