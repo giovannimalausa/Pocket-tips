@@ -9,45 +9,55 @@ let greenCard = document.querySelector(".green-card.cover.main-cover");
 let redCard = document.querySelector(".red-card.cover.main-cover");
 let pinkCard = document.querySelector(".pink-card.cover.main-cover");
 
+let inner_X = 190;
+let inner_Y = -30;
+let inner_deg = 20
+let outer_X = 350;
+let outer_Y = 80;
+let outer_deg = 40;
+
+let center_X = 0;
+let center_Y = -80;
+
 const mainCards_blue = [blueCard, yellowCard, greenCard, redCard, pinkCard];
 let overable = true; 
 
 
     let pink = gsap.to(".pink-card.cover.main-cover", {
-        x: '-260px',
-        y: 50,
-        rotate: -40,
+        x: -outer_X,
+        y: outer_Y,
+        rotate: -outer_deg,
         duration: 1,
         ease: "back",
     });
     
     let red = gsap.to(".red-card.cover.main-cover", {
-        x: '-140px',
-        y: '-20',
-        rotate: -20,
+        x: -inner_X,
+        y: inner_Y,
+        rotate: -inner_deg,
         duration: 1,
         ease: "back"
     });
     
     let blue = gsap.to(".blue-card.cover.main-cover", {
-        x: 0,
-        y: -40,
+        x: center_X,
+        y: center_Y,
         duration: 1,
         ease: "back"
     });
     
     let yellow = gsap.to(".yellow-card.cover.main-cover", {
-        x: '140px',
-        y: '-20',
-        rotate: 20,
+        x: inner_X,
+        y: inner_Y,
+        rotate: inner_deg,
         duration: 1,
         ease: "back"
     });
     
     let green = gsap.to(".green-card.cover.main-cover", {
-        x: '260px',
-        y: 50,
-        rotate: 40,
+        x: outer_X,
+        y: outer_Y,
+        rotate: outer_deg,
         duration: 1,
         ease: "back"
     });
@@ -203,7 +213,7 @@ blueCard.addEventListener("click", function() {
     // }
 
     let blueScaleUp = gsap.to(blueCard, {
-        scale: 1.75,
+        scale: 1.25,
         x: 0,
         y: 0,
         rotate: 0,
@@ -221,7 +231,7 @@ blueCard.addEventListener("click", function() {
 
 
 function goToPage() {
-    setTimeout(window.location.href = "blue-deck CSS.html", 1000);
+    setTimeout(window.location.href = "blue-deck.html", 1000);
     console.log("Cambio pagina")
     
 }
