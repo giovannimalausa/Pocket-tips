@@ -9,8 +9,8 @@ let blueCard6 = document.querySelector(".blue-card.card-6");
 
 // Posizioni predefinite
 let blueCard0_x = 0; 
-let blueCard1_x = '20vw'; // 430
-let blueCard2_x = '40vw';
+let blueCard1_x = '22vw'; // 430
+let blueCard2_x = '42vw';
 let blueCard3_x = '100vw';
 let blueCard4_x = '-'+blueCard3_x;
 let blueCard5_x = '-'+blueCard2_x;
@@ -19,18 +19,12 @@ let blueCard6_x = '-'+blueCard1_x;
 const blueDeck = [blueCard0, blueCard1, blueCard2, blueCard3, blueCard4, blueCard5, blueCard6];
 const deckPositions_X = [blueCard0_x, blueCard1_x, blueCard2_x, blueCard3_x, blueCard4_x, blueCard5_x, blueCard6_x];
 
+let p = 1; // Variabile per posizione
+
 function showCards() {
-    blueDeck.forEach((element) => {
-        element.classList.remove('hidden-card');
+    blueDeck.forEach((card) => {
+        card.classList.remove('hidden-card');
     });
-    gsap.to(blueCard1, {
-        scale: 1,
-        x: blueCard1_x,
-        y: 0,
-        rotate: 0,
-        duration: 1,
-        ease: "back",
-    })
 
     for (let i = 0; i < blueDeck.length; i++) {
         const card = blueDeck[i];
@@ -46,3 +40,43 @@ function showCards() {
 }
 showCards();
 
+for (let i = 0; i < blueDeck.length; i++) {
+    const card = blueDeck[i];
+    
+    // Add a click event listener to each element
+    card.addEventListener('click', function() {
+        // Change the scale of the clicked element
+        gsap.to(this, {
+            scale: 1.25,
+            duration: 0.3,
+        });
+
+        for (let j = 0; j < blueDeck.length; j++) {
+            if (j !== i) {
+                gsap.to(blueDeck[j], {
+                    scale: 1,
+                    duration: 0.3,
+                });
+            }
+        }
+
+        for (let k = 0; k < blueDeck.length; k++) {
+            const card = blueDeck[k];
+            const card_X = deckPositions_X[(k - p + deckPositions_X.length) % deckPositions_X.length];
+            
+            gsap.to(card, {
+                x: card_X,
+                duration: 1,
+                ease: 'back',
+            })
+
+            console.log(k);
+        }
+        console.log(p);
+        if (p === 7) {
+            p = 1;
+        } else {
+            p += 1;
+        }
+    });
+}
