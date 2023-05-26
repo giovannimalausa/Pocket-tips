@@ -61,6 +61,33 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
+// Using GSAP to scale up all the img elements with the class 'vector' to 20 times their original size
+let vector = document.querySelectorAll('.vector');
+
+let vectorScale = gsap.to(vector, {
+    delay: .3,
+    scale: 5,
+    duration: 1,
+    rotate: 180,
+    ease: 'back',
+    onComplete: switchToFace, 
+});
+
+function switchToFace() {
+    blueDeck.forEach((card) => {
+        // Add the class 'face-wrapper' to child element that already has the class 'face'
+        card.children[0].classList.add('hide');
+        // Avoid card flashing blue
+        card.style.backgroundColor = 'var(--light-background)'; 
+        // Show the face of the card
+        card.children[1].classList.add('show');
+        // Fade in the face of the card
+        gsap.to(card.children[1], {
+            opacity: 1,
+            duration: 0.5,
+        })        
+    });
+}
 
 for (let i = 0; i < blueDeck.length; i++) {
     const card = blueDeck[i];
@@ -108,8 +135,6 @@ for (let i = 0; i < blueDeck.length; i++) {
         } else {
             p += 1;
         }
-
-        
     });
 }
 
