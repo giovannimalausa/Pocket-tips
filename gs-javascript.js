@@ -59,7 +59,8 @@ let overable = true;
         y: outer_Y,
         rotate: outer_deg,
         duration: 1,
-        ease: "back"
+        ease: "back",
+        onComplete: enableMouse,
     });
 
     pink.delay(1);
@@ -68,6 +69,10 @@ let overable = true;
     blue.delay(1);
     yellow.delay(1);
 
+function enableMouse() {
+    document.body.style.pointerEvents = 'all';
+    console.log('Mouse enabled');
+}
 
 
 // BLUE

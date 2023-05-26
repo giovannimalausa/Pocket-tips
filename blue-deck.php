@@ -20,50 +20,41 @@
         <!-- Blue deck -->
 
         <div class="fan-out">
-            <div class="card blue-card cover card-4 hidden-card">
-                <div class="blue-vector vector-wrapper">
-                    <img src="res/blue-vector.svg" alt="Blue vector" class="blue-vector vector">
-                </div>
-            </div>
-    
-            <div class="card blue-card cover card-5 hidden-card">
-                <div class="blue-vector vector-wrapper">
-                    <img src="res/blue-vector.svg" alt="Blue vector" class="blue-vector vector">
-                </div>
-            </div>
-    
-            <div class="card blue-card cover card-6 hidden-card" id="blue-6">
+
+        <?php 
+
+$args = array( 
+    'posts_per_page' => 3, 
+    'post_type' => 'post', 
+    'post_status' => 'publish' 
+);
+
+$my_custom_query = new WP_Query( $args );
+
+var iterator = 0;
+
+
+if( $my_custom_query->have_posts() ):
+    while( $my_custom_query->have_posts() ): 
+        $my_custom_query->the_post();
+
+        iterator = iterator + 1;
+        
+        
+        ?>
+
+
+            <div class="card blue-card cover card-<?php echo iterator?> hidden-card" data-iterator=<?php echo iterator?>>
                 <div class="blue-vector vector-wrapper">
                     <img src="res/blue-vector.svg" alt="Blue vector" class="blue-vector vector">
                 </div>
             </div>
 
-            <div class="card blue-card cover card-0 selected-card">
-                <div class="blue-vector vector-wrapper">
-                    <img src="res/blue-vector.svg" alt="Blue vector" class="blue-vector vector">
-                </div>
-                <div class="face-wrapper">
-                    <h1>Titolo della card</h1>
-                </div>
-            </div>    
+            <?php the_title()?>
 
-            <div class="card blue-card cover card-1 hidden-card">
-                <div class="blue-vector vector-wrapper">
-                    <img src="res/blue-vector.svg" alt="Blue vector" class="blue-vector vector">
-                </div>
-            </div>
+            <?php endwhile; endif;>
     
-            <div class="card blue-card cover card-2 hidden-card">
-                <div class="blue-vector vector-wrapper">
-                    <img src="res/blue-vector.svg" alt="Blue vector" class="blue-vector vector">
-                </div>
-            </div>
-    
-            <div class="card blue-card cover card-3 hidden-card">
-                <div class="blue-vector vector-wrapper">
-                    <img src="res/blue-vector.svg" alt="Blue vector" class="blue-vector vector">
-                </div>
-            </div>
+          
         </div>
 
     </div>

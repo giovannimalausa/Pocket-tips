@@ -12,7 +12,7 @@ let blueCard6 = document.querySelector(".blue-card.card-6");
 let blueCard0_x = 0; 
 let blueCard1_x = '22vw'; // 430
 let blueCard2_x = '42vw';
-let blueCard3_x = '100vw';
+let blueCard3_x = '65vw';
 let blueCard4_x = '-'+blueCard3_x;
 let blueCard5_x = '-'+blueCard2_x;
 let blueCard6_x = '-'+blueCard1_x;
@@ -47,14 +47,24 @@ function showCards() {
             duration: 1,
             ease: 'back',
         })
-
     }
+    document.body.style.pointerEvents = 'all';
+    console.log('Mouse unlocked');
 }
 showCards();
 
+// Pointer Event => All // Manualmente, premendo M
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'm' || event.key === 'M') {
+        document.body.style.pointerEvents = 'all';
+        console.log('Mouse unlocked');
+    }
+});
+
+
 for (let i = 0; i < blueDeck.length; i++) {
     const card = blueDeck[i];
-    
+
     // Add a click event listener to each element
     card.addEventListener('click', function() {
         // Change the scale of the clicked element
@@ -77,11 +87,17 @@ for (let i = 0; i < blueDeck.length; i++) {
             const card = blueDeck[k];
             const card_X = deckPositions_X[(k - p + deckPositions_X.length) % deckPositions_X.length]; // Usiamo il modulo per far ricominciare le carte in loop
 
+            // Opacità a 0 per la carta che si sposta nella posizione a dx (= blueCard3_x)
+            if (card_X === blueCard3_x)  {
+                card.style.opacity = 0;
+            }
+
             gsap.to(card, {
                 x: card_X,
                 rotation: deckPositions_deg[(k - p + deckPositions_X.length) % deckPositions_X.length], // per il random: gsap.utils.random(-3, 3, 1) ---> (min, max, snap)
-                duration: 1,
+                duration: 1.2,
                 ease: 'back',
+                onComplete: resetOpacity(card),
             })
 
             console.log(k);
@@ -92,5 +108,16 @@ for (let i = 0; i < blueDeck.length; i++) {
         } else {
             p += 1;
         }
+
+        
     });
+}
+
+// Reset opacity quando la card è tornata nella posizione iniziale
+function resetOpacity(card) {
+    // Wait 0.5 seconds
+    setTimeout(function() {
+        card.style.opacity = 1;
+    }, 500);
+    
 }
