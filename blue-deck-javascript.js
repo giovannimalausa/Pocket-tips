@@ -41,9 +41,11 @@ function showCards() {
     for (let i = 0; i < blueDeck.length; i++) {
         const card = blueDeck[i];
         const card_X = deckPositions_X[i];
+        const card_deg = deckPositions_deg[i];
         
         gsap.to(card, {
             x: card_X,
+            rotate: deckPositions_deg[i],
             duration: 1,
             ease: 'back',
         })
@@ -58,6 +60,7 @@ document.addEventListener('keydown', function(event) {
     if (event.key === 'm' || event.key === 'M') {
         document.body.style.pointerEvents = 'all';
         console.log('Mouse unlocked');
+        nextCard();
     }
 });
 
@@ -93,7 +96,7 @@ for (let i = 0; i < blueDeck.length; i++) {
     const card = blueDeck[i];
 
     // Add a click event listener to each element
-    card.addEventListener('click', function() {
+    card.addEventListener('click', function nextCard() {
         // Change the scale of the clicked element
         gsap.to(this, {
             scale: 1.25,
