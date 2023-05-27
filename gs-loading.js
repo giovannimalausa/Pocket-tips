@@ -1,5 +1,4 @@
 // Variabili
-
 let angoloRotazione = 45;
 
 // MAIN CARDS
@@ -29,7 +28,10 @@ let center_X = 0;
 let center_Y = -80;
 
 const mainCards_blue = [blueCard, yellowCard, greenCard, redCard, pinkCard];
-let overable = true; 
+let overable = true;
+
+// Array per Animazioni che portano le carte "extra" al centro
+let extraCardsToCenterAnimations = [];
 
 let pinkToCenter = gsap.fromTo(".pink-card.cover.main-cover", {
     x: -500,
@@ -47,7 +49,7 @@ let pinkToCenter = gsap.fromTo(".pink-card.cover.main-cover", {
 });
 
 let redToCenter = gsap.fromTo(".red-card.cover.main-cover", {
-    x: 500,
+    x: 600,
     y: 205,
     rotate: 30,
 },
@@ -93,7 +95,7 @@ let yellowToCenter = gsap.fromTo(".yellow-card.cover.main-cover", {
 
 let greenToCenter = gsap.fromTo(".green-card.cover.main-cover", {
     x: -50,
-    y: -550,
+    y: -295,
     rotate: -45,
 },
 {
@@ -106,6 +108,42 @@ let greenToCenter = gsap.fromTo(".green-card.cover.main-cover", {
     paused: true,
     onComplete: distributeFan, // Distribuisce le carte a ventaglio dopo averle centrate
 });
+
+// Animazione card extra
+const extraCards = document.querySelectorAll(".extra");
+const extraCards_positions = [
+    {x: gsap.utils.random(-300, -250, 1), y: gsap.utils.random(125, 100, 1), angle: gsap.utils.random(-15, -5, 1)}, // verde
+    {x: gsap.utils.random(50, 100, 1), y: gsap.utils.random(300, 400, 1), angle: gsap.utils.random(-80, 45, 5)},
+    {x: gsap.utils.random(300, 400, 1), y: gsap.utils.random(0, 100, 1), angle: gsap.utils.random(-45, 45, 5)},
+    {x: gsap.utils.random(500, 700, 1), y: gsap.utils.random(700, 700, 1), angle: gsap.utils.random(-45, 45, 5)},
+    {x: gsap.utils.random(-400, -300, 1), y: gsap.utils.random(700, 700, 1), angle: gsap.utils.random(-45, 45, 5)},
+    {x: gsap.utils.random(100, 300, 1), y: gsap.utils.random(-700, -700, 1), angle: gsap.utils.random(-45, 45, 5)},
+    {x: gsap.utils.random(200, 400, 1), y: gsap.utils.random(-450, -400, 1), angle: gsap.utils.random(-45, 45, 5)},
+    {x: gsap.utils.random(-800, -700, 1), y: gsap.utils.random(-600, -550, 1), angle: gsap.utils.random(-45, 45, 5)}, // ok (gialla alto dx)
+    {x: gsap.utils.random(600, 800, 1), y: gsap.utils.random(-700, -500, 1), angle: gsap.utils.random(-0, 0, 5)}, // rosa
+    {x: gsap.utils.random(-500, -400, 1), y: gsap.utils.random(-700, -700, 1), angle: gsap.utils.random(-45, 45, 5)},
+];
+
+for (var i = 0; i < extraCards.length; i++) {
+    let extraCardToCenterAnimation = gsap.fromTo(extraCards[i], {
+        x: extraCards_positions[i].x,
+        y: extraCards_positions[i].y,
+        rotate: extraCards_positions[i].angle,
+    },
+    {
+        x: 0,
+        y: 0,
+        rotate: 0,
+        duration: 1,
+        delay: 0.5,
+        ease: "power1.inOut",
+        paused: true,
+        onComplete: hideExtraCards, // Nasconde le carte extra dopo averle centrate
+    });
+    // Push new animation to the array
+    extraCardsToCenterAnimations.push(extraCardToCenterAnimation);
+  }
+
 
 // ============  Animazioni ventaglio ============
 
@@ -175,6 +213,22 @@ document.body.addEventListener("keydown", function(e) {
     }
 });
 
+// // Function to control the animation based on scroll position
+// function handleScroll() {
+//     const scrollPosition = window.scrollY;
+
+//     // Adjust the animation based on scroll position
+//     pinkToCenter.progress(scrollPosition / (document.documentElement.scrollHeight - window.innerHeight));
+//     redToCenter.progress(scrollPosition / (document.documentElement.scrollHeight - window.innerHeight));
+//     blueToCenter.progress(scrollPosition / (document.documentElement.scrollHeight - window.innerHeight));
+//     yellowToCenter.progress(scrollPosition / (document.documentElement.scrollHeight - window.innerHeight));
+//     greenToCenter.progress(scrollPosition / (document.documentElement.scrollHeight - window.innerHeight));
+
+// }
+
+// Event listener for scroll
+window.addEventListener('scroll', handleScroll);
+
 // Funzione che centra le carte nella pagina
 function centerFan() {
     pinkToCenter.play();
@@ -182,6 +236,16 @@ function centerFan() {
     blueToCenter.play();
     yellowToCenter.play();
     greenToCenter.play();
+    // Loop che fa partire le animazioni delle carte extra
+    for (var i = 0; i < extraCardsToCenterAnimations.length; i++) {
+        extraCardsToCenterAnimations[i].play();
+    };
+}
+// Le card extra spariscono
+function hideExtraCards() {
+    extraCards.forEach(function(card) {
+        card.style.opacity = "0";
+    });
 }
 
 // Funzione che distribuisce le carte a ventaglio nella pagina

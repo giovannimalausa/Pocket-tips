@@ -30,6 +30,14 @@ body {
     margin: 0;
     padding: 0;
     pointer-events: none;
+    overflow-x: hidden;
+    height: 2000px;
+    -ms-overflow-style: none;  /* Hide scroll bar in IE and Edge */
+    scrollbar-width: none;  /* Hide scroll bar in Firefox */
+}
+
+body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
+    display: none;
 }
 
 .barraInAlto {
@@ -43,7 +51,10 @@ body {
 
 .wrapper {
     margin: 0;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
     height: 100dvh;
     display: flex;
     justify-content: center;
@@ -78,29 +89,44 @@ body {
 
 .pink-card.cover {
     background-color: var(--pink-primary);
-    z-index: 31;
 }
 
 .red-card.cover {
     background-color: var(--red-primary);
-    rotate: 5deg;
-    z-index: 32;
 }
 
 .blue-card.cover {
     background-color: var(--blue-primary);
-    transform: rotateZ(-0deg);
-    z-index: 34;
 }
 
 .yellow-card.cover {
     background-color: var(--yellow-primary);
-    transform: rotateZ(-1deg);
-    z-index: 35;
 }
 
 .green-card.cover {
     background-color: var(--green-primary);
+}
+
+.pink-card.main-cover {
+    z-index: 31;
+}
+
+.red-card.main-cover {
+    rotate: 5deg;
+    z-index: 32;
+}
+
+.blue-card.main-cover {
+    transform: rotateZ(-0deg);
+    z-index: 34;
+}
+
+.yellow-card.main-cover {
+    transform: rotateZ(-1deg);
+    z-index: 35;
+}
+
+.green-card.main-cover {
     rotate: 3deg;
     z-index: 36;
 }
@@ -137,17 +163,6 @@ body {
 .vector {
     justify-content: center;
     align-items: center;
-}
-
-.curtain {
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: -1;
-    width: 100vw;
-    height: 100vh;
-    background-color: red;
-
 }
 
 .face-wrapper {
@@ -221,10 +236,11 @@ h2 {
 }
 
 .scroll-wrapper {
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     position: fixed;
     top: 0;
-    height: 200vh;
+    height: 2000px;
     width: 100vw;
     display: flex;
     flex-direction: column;
@@ -232,14 +248,24 @@ h2 {
     margin: 0;
     padding: 0;
     background-color: transparent;
+    -ms-overflow-style: none;  /* Hide scroll bar in IE and Edge */
+    scrollbar-width: none;  /* Hide scroll bar in Firefox */
+}
+
+.scroll-wrapper::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
+    display: none;
 }
 
 .scroll-element {
-    margin-top: 100vh;
+    position: relative;
+    top: 200px;
     height: 100px;
     width: 100px;
     background-color: var(--light-background);
 }
 
-/* Set position of only the first .card element with .extra class */
+.extra {
+    z-index: 2;
+    
+}
 
