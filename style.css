@@ -1,7 +1,8 @@
 :root {
     /* Colors */
     --dark-background: #1F2023;
-    --light-background: #F5EDE0;
+    --light-background: #FDF4EF;
+    /* --light-background: #F5EDE0; */
 
     --yellow-primary: #F2BE58;
     --yellow-secondary: #F2BE58;
@@ -28,7 +29,6 @@
 body {
     margin: 0;
     padding: 0;
-    overflow: hidden;
     pointer-events: none;
 }
 
@@ -42,12 +42,14 @@ body {
 }
 
 .wrapper {
+    margin: 0;
     position: relative;
     height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--dark-background);
+    overflow: hidden;
 }
 
 .card {
@@ -217,3 +219,27 @@ h2 {
     padding: 8px 0;
     margin: 0 auto;
 }
+
+.scroll-wrapper {
+    overflow: scroll;
+    position: fixed;
+    top: 0;
+    height: 200vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+.scroll-element {
+    margin-top: 100vh;
+    height: 100px;
+    width: 100px;
+    background-color: var(--light-background);
+}
+
+/* Set position of only the first .card element with .extra class */
+

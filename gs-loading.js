@@ -107,13 +107,15 @@ let greenToCenter = gsap.fromTo(".green-card.cover.main-cover", {
     onComplete: distributeFan, // Distribuisce le carte a ventaglio dopo averle centrate
 });
 
+// ============  Animazioni ventaglio ============
+
 // ===| Pink |===
 let pink = gsap.to(".pink-card.cover.main-cover", {
     x: -outer_X,
     y: outer_Y,
     rotate: -outer_deg,
     duration: 1,
-    delay: 1,
+    delay: 0.5,
     ease: "back",
     paused: true,
 });
@@ -124,7 +126,7 @@ let red = gsap.to(".red-card.cover.main-cover", {
     y: inner_Y,
     rotate: -inner_deg,
     duration: 1,
-    delay: 1,
+    delay: 0.5,
     ease: "back",
     paused: true,
 });
@@ -134,7 +136,7 @@ let blue = gsap.to(".blue-card.cover.main-cover", {
     x: center_X,
     y: center_Y,
     duration: 1,
-    delay: 1,
+    delay: 0.5,
     ease: "back",
     paused: true,
 });
@@ -145,7 +147,7 @@ let yellow = gsap.to(".yellow-card.cover.main-cover", {
     y: inner_Y,
     rotate: inner_deg,
     duration: 1,
-    delay: 1,
+    delay: 0.5,
     ease: "back",
     paused: true,
 });
@@ -156,7 +158,7 @@ let green = gsap.to(".green-card.cover.main-cover", {
     y: outer_Y,
     rotate: outer_deg,
     duration: 1,
-    delay: 1,
+    delay: 0.5,
     ease: "back",
     paused: true,
     onComplete: enableMouse,
@@ -354,5 +356,4 @@ blueCard.addEventListener("click", function() {
 function goToPage() {
     setTimeout(window.location.href = "blue-deck.html", 1000);
     console.log("Cambio pagina")
-    
 }
