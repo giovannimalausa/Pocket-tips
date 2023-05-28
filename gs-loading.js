@@ -29,6 +29,7 @@ let center_Y = -80;
 
 const mainCards_blue = [blueCard, yellowCard, greenCard, redCard, pinkCard];
 let overable = true;
+let animationToCenterComplete = false; // Animazione che porta le carte al centro completata?
 
 // Array per Animazioni che portano le carte "extra" al centro
 let extraCardsToCenterAnimations = [];
@@ -213,18 +214,29 @@ document.body.addEventListener("keydown", function(e) {
     }
 });
 
-// // Function to control the animation based on scroll position
-// function handleScroll() {
-//     const scrollPosition = window.scrollY;
+// Function to control the animation based on scroll position
+function handleScroll() {
+    let scrollPosition = window.scrollY;
 
-//     // Adjust the animation based on scroll position
-//     pinkToCenter.progress(scrollPosition / (document.documentElement.scrollHeight - window.innerHeight));
-//     redToCenter.progress(scrollPosition / (document.documentElement.scrollHeight - window.innerHeight));
-//     blueToCenter.progress(scrollPosition / (document.documentElement.scrollHeight - window.innerHeight));
-//     yellowToCenter.progress(scrollPosition / (document.documentElement.scrollHeight - window.innerHeight));
-//     greenToCenter.progress(scrollPosition / (document.documentElement.scrollHeight - window.innerHeight));
+    
+    if (scrollPosition < 500 && animationToCenterComplete == false) {
+            // Adjust the animation based on scroll position
+            pinkToCenter.progress(scrollPosition / (document.documentElement.scrollHeight - window.innerHeight));
+            redToCenter.progress(scrollPosition / (document.documentElement.scrollHeight - window.innerHeight));
+            blueToCenter.progress(scrollPosition / (document.documentElement.scrollHeight - window.innerHeight));
+            yellowToCenter.progress(scrollPosition / (document.documentElement.scrollHeight - window.innerHeight));
+            greenToCenter.progress(scrollPosition / (document.documentElement.scrollHeight - window.innerHeight));
+            //Adjust the animation of extra cards based on scroll position
+            for (let i = 0; i < extraCardsToCenterAnimations.length; i++) {
+                extraCardsToCenterAnimations[i].progress(scrollPosition / (document.documentElement.scrollHeight - window.innerHeight));
+            }
+    } else {
+        centerFan();
+    }
 
-// }
+    
+    
+}
 
 // Event listener for scroll
 window.addEventListener('scroll', handleScroll);
@@ -250,6 +262,7 @@ function hideExtraCards() {
 
 // Funzione che distribuisce le carte a ventaglio nella pagina
 function distributeFan() {
+    animationToCenterComplete = true;
     pink.play();
     red.play();
     green.play();
@@ -395,8 +408,9 @@ blueCard.addEventListener("click", function() {
     console.log("Blue was clicked.")
     let blueClicked = gsap.to([".pink-card.cover", ".red-card.cover", ".yellow-card.cover", ".green-card.cover"], {
         opacity: 0,
+        y: 9000,
         paused: true,
-        duration: 0.2,
+        duration: 2,
     })
 
     let blueScaleUp = gsap.to(blueCard, {

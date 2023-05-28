@@ -26,12 +26,11 @@ let blueCard4_deg = 0;
 let blueCard5_deg = 1.85; // far left
 let blueCard6_deg = -1.64; // left
 
+let p = 1; // Variabile per posizione nella traslazione delle card nel carosello
 
 const blueDeck = [blueCard0, blueCard1, blueCard2, blueCard3, blueCard4, blueCard5, blueCard6];
 const deckPositions_X = [blueCard0_x, blueCard1_x, blueCard2_x, blueCard3_x, blueCard4_x, blueCard5_x, blueCard6_x];
 const deckPositions_deg = [blueCard0_deg, blueCard1_deg, blueCard2_deg, blueCard3_deg, blueCard4_deg, blueCard5_deg, blueCard6_deg];
-
-let p = 1; // Variabile per posizione
 
 function showCards() {
     blueDeck.forEach((card) => {
@@ -97,12 +96,22 @@ for (let i = 0; i < blueDeck.length; i++) {
 
     // Add a click event listener to each element
     card.addEventListener('click', function nextCard() {
+        console.log('Clicked on card with transform = ' + this.style.transform);
+        let transformPropertyofClickedElement = this.style.transform;
+        // Isolate the first number in the transform property of the clicked element, which is the translateX value
+        const regex = /translate\((.*?)vw/g;
+        const match = regex.exec(transformPropertyofClickedElement);
+        const translateX = match ? match[1] : null;
+        
+        console.log('TranslateX of clicked card is = ' + translateX);
+
         // Change the scale of the clicked element
         gsap.to(this, {
             scale: 1.25,
             duration: 0.3,
         });
 
+        // Change the scale of all the other elements
         for (let j = 0; j < blueDeck.length; j++) {
             if (j !== i) {
                 gsap.to(blueDeck[j], {
@@ -112,10 +121,27 @@ for (let i = 0; i < blueDeck.length; i++) {
             }
         }
 
+        // Define how many positions the cards have to move ===== THIS IS BROKEN ===== 
+        if (translateX == null) {
+            adjustIncrement = 1;
+        } else if (translateX+'vw' === deckPositions_X[1]) {
+            adjustIncrement = 0;
+        } else if (translateX+'vw' === deckPositions_X[2]) {
+            adjustIncrement = -1;
+        } else if (translateX === deckPositions_X[3]) {
+            adjustIncrement = 0;
+        } else if (translateX === deckPositions_X[4]) {
+            adjustIncrement = 0;
+        } else if (translateX === deckPositions_X[5]) {
+            adjustIncrement = 0;
+        } else if (translateX === deckPositions_X[6]) {
+            adjustIncrement = 0;
+        }
+
         // Traslazione
         for (let k = 0; k < blueDeck.length; k++) {
             const card = blueDeck[k];
-            const card_X = deckPositions_X[(k - p + deckPositions_X.length) % deckPositions_X.length]; // Usiamo il modulo per far ricominciare le carte in loop
+            const card_X = deckPositions_X[(k - p + adjustIncrement + deckPositions_X.length) % deckPositions_X.length]; // Usiamo il modulo per far ricominciare le carte in loop
 
             // Opacità a 0 per la carta che si sposta nella posizione a dx (= blueCard3_x)
             if (card_X === blueCard3_x)  {
@@ -124,7 +150,7 @@ for (let i = 0; i < blueDeck.length; i++) {
 
             gsap.to(card, {
                 x: card_X,
-                rotation: deckPositions_deg[(k - p + deckPositions_X.length) % deckPositions_X.length], // per il random: gsap.utils.random(-3, 3, 1) ---> (min, max, snap)
+                rotation: deckPositions_deg[(k - p + adjustIncrement + deckPositions_X.length) % deckPositions_X.length], // per il random: gsap.utils.random(-3, 3, 1) ---> (min, max, snap)
                 duration: 1.2,
                 ease: 'back',
                 onComplete: resetOpacity(card),
@@ -133,7 +159,7 @@ for (let i = 0; i < blueDeck.length; i++) {
             console.log(k);
         }
         console.log(p);
-        if (p === 7) {
+        if (p >= 7) {
             p = 1;
         } else {
             p += 1;
