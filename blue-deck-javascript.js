@@ -10,12 +10,21 @@ let blueCard6 = document.querySelector(".blue-card.card-6");
 
 // Posizioni predefinite
 let blueCard0_x = 0; 
-let blueCard1_x = '22vw'; // 430
+let blueCard1_x = '22vw';
 let blueCard2_x = '42vw';
 let blueCard3_x = '65vw';
 let blueCard4_x = '-'+blueCard3_x;
 let blueCard5_x = '-'+blueCard2_x;
 let blueCard6_x = '-'+blueCard1_x;
+
+// Posizioni predefinite, senza unità di misura
+let position_0_x_value = 0; 
+let position_1_x_value = 22;
+let position_2_x_value = 42;
+let position_3_x_value = 65;
+let position_4_x_value = '-'+blueCard3_x;
+let position_5_x_value = '-'+blueCard2_x;
+let position_6_x_value = '-'+blueCard1_x;
 
 // Angoli predefiniti
 let blueCard0_deg = 0; // center
@@ -26,7 +35,13 @@ let blueCard4_deg = 0;
 let blueCard5_deg = 1.85; // far left
 let blueCard6_deg = -1.64; // left
 
-let p = 1; // Variabile per posizione nella traslazione delle card nel carosello
+let p = 0; // Variabile per posizione nella traslazione delle card nel carosello
+let shift_direction = "avanti"; // Variabile per direzione della traslazione delle card nel carosello
+let shift_amount = 1; // Variabile per il numero di posizioni nella traslazione delle card nel carosello
+
+// CURRENT STATE
+let currentCardIndex = 0;
+let currentPositionIndex = 0;
 
 const blueDeck = [blueCard0, blueCard1, blueCard2, blueCard3, blueCard4, blueCard5, blueCard6];
 const deckPositions_X = [blueCard0_x, blueCard1_x, blueCard2_x, blueCard3_x, blueCard4_x, blueCard5_x, blueCard6_x];
@@ -123,25 +138,29 @@ for (let i = 0; i < blueDeck.length; i++) {
 
         // Define how many positions the cards have to move ===== THIS IS BROKEN ===== 
         if (translateX == null) {
-            adjustIncrement = 1;
-        } else if (translateX+'vw' === deckPositions_X[1]) {
-            adjustIncrement = 0;
-        } else if (translateX+'vw' === deckPositions_X[2]) {
-            adjustIncrement = -1;
-        } else if (translateX === deckPositions_X[3]) {
-            adjustIncrement = 0;
-        } else if (translateX === deckPositions_X[4]) {
-            adjustIncrement = 0;
-        } else if (translateX === deckPositions_X[5]) {
-            adjustIncrement = 0;
-        } else if (translateX === deckPositions_X[6]) {
-            adjustIncrement = 0;
+        } else if (translateX > position_1_x_value-10) {
+            console.log('translateX is greater than position_1_x_value - 10');
+            shift_direction = "avanti";
+        } else if (translateX < position_6_x_value+10) {
+            console.log('translateX is less than position_6_x_value + 10');
+            shift_direction = "indietro";
         }
-
+        
+        // Determine the starting index of the deckPositions_X array based on the shift value
+        let startIndex;
+        if (shift_direction === "indietro") {
+            startIndex = 1 + p;
+        } else if (shift_direction === "avanti") {
+            startIndex = deckPositions_X.length - 1 - p;
+        } else {
+            startIndex = 0;
+        }
+        
+        // Combine the arrays based on the corresponding indeces
         // Traslazione
         for (let k = 0; k < blueDeck.length; k++) {
             const card = blueDeck[k];
-            const card_X = deckPositions_X[(k - p + adjustIncrement + deckPositions_X.length) % deckPositions_X.length]; // Usiamo il modulo per far ricominciare le carte in loop
+            const card_X = deckPositions_X[(k + startIndex) % deckPositions_X.length];
 
             // Opacità a 0 per la carta che si sposta nella posizione a dx (= blueCard3_x)
             if (card_X === blueCard3_x)  {
@@ -150,20 +169,19 @@ for (let i = 0; i < blueDeck.length; i++) {
 
             gsap.to(card, {
                 x: card_X,
-                rotation: deckPositions_deg[(k - p + adjustIncrement + deckPositions_X.length) % deckPositions_X.length], // per il random: gsap.utils.random(-3, 3, 1) ---> (min, max, snap)
+                rotation: deckPositions_deg[(k + startIndex) % deckPositions_X.length],
                 duration: 1.2,
                 ease: 'back',
                 onComplete: resetOpacity(card),
             })
-
-            console.log(k);
+            console.log((k + startIndex) % deckPositions_X.length)
         }
-        console.log(p);
+        console.log("Used p = " + p);
+        p++;
         if (p >= 7) {
-            p = 1;
-        } else {
-            p += 1;
+            p = 0;
         }
+        console.log("New p = " + p);
     });
 }
 
