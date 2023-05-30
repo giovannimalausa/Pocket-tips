@@ -82,6 +82,29 @@ header svg {
     gap: 20px;
 }
 
+.tags-container {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.tags-container .tag {
+    background-color: var(--blue-primary);
+    color: var(--light-background);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.button {
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.button:after {
+    content: "➚";}
+
 .image {
     grid-column: span 7;
 }
