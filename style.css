@@ -68,7 +68,7 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
 }
 
 .card {
-    width: 300px; /* former 180px */
+    width: 300px; /* former 180px Ciao */
     height: 450px; /* former 270px */
     position: absolute;
     border-radius: 40px;
