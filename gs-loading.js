@@ -292,16 +292,16 @@ let rotateBlue = gsap.to(".blue-vector", { // Animazione vettore blu
 
 // On BLUE over
 blueCard.addEventListener("mouseenter", function() {
-    if (overable === true) {
         enterBlue.play(); // Animazione card
         rotateBlue.play(); // Animazione vettore blu
-    }
+        logoAnimation.goToAndStop(blueLogoKeyframe, true); // Animazione logo blu (stop)
 });
 
 blueCard.addEventListener("mouseleave", function() {
     if (overable === true) {
         enterBlue.reverse(); // Animazione card (reverse)
         rotateBlue.reverse(); // Animazione vettore blue (reverse)
+        logoAnimation.play(); 
     }
 });
 
@@ -323,10 +323,12 @@ let rotateYellow = gsap.to(".yellow-vector", { // Animazione vettore blu
 yellowCard.addEventListener("mouseenter", function() {
     enterYellow.play();
     rotateYellow.play();
+    logoAnimation.goToAndStop(yellowLogoKeyframe, true); // Animazione logo giallo (stop)
 });
 yellowCard.addEventListener("mouseleave", function() {
     enterYellow.reverse();
     rotateYellow.reverse();
+    logoAnimation.play(); 
 });
 
 // GREEN
@@ -347,10 +349,12 @@ let rotateGreen = gsap.to(".green-vector", { // Animazione vettore blu
 greenCard.addEventListener("mouseenter", function() {
     enterGreen.play();
     rotateGreen.play();
+    logoAnimation.goToAndStop(greenLogoKeyframe, true); // Animazione logo verde (stop)
 });
 greenCard.addEventListener("mouseleave", function() {
     enterGreen.reverse();
     rotateGreen.reverse();
+    logoAnimation.play(); 
 });
 
 // RED
@@ -371,10 +375,12 @@ let rotateRed = gsap.to(".red-vector", { // Animazione vettore blu
 redCard.addEventListener("mouseenter", function() {
     enterRed.play();
     rotateRed.play();
+    logoAnimation.goToAndStop(redLogoKeyframe, true); // Animazione logo rosso (stop)
 });
 redCard.addEventListener("mouseleave", function() {
     enterRed.reverse();
     rotateRed.reverse();
+    logoAnimation.play(); 
 });
 
 // PINK
@@ -395,10 +401,12 @@ let rotatePink = gsap.to(".pink-vector", { // Animazione vettore blu
 pinkCard.addEventListener("mouseenter", function() {
     enterPink.play();
     rotatePink.play();
+    logoAnimation.goToAndStop(pinkLogoKeyframe, true); // Animazione logo pink (stop)
 });
 pinkCard.addEventListener("mouseleave", function() {
     enterPink.reverse();
     rotatePink.reverse();
+    logoAnimation.play(); 
 });
 
 
@@ -430,8 +438,25 @@ blueCard.addEventListener("click", function() {
     blueScaleUp.play();
 });
 
-
 function goToPage() {
     setTimeout(window.location.href = "blue-deck.html", 1000);
     console.log("Cambio pagina")
 }
+
+// Logo animation
+
+// keyframes
+var blueLogoKeyframe = 313;
+var greenLogoKeyframe = 32;
+var pinkLogoKeyframe = 90;
+var yellowLogoKeyframe = 248;
+var redLogoKeyframe = 190;
+var whiteLogoKeyframe = 136;
+
+var logoAnimation = bodymovin.loadAnimation({
+    container: document.getElementById('animatedLogoContainer'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'res/logo/animatedLogo_puntoColorato.json'
+});

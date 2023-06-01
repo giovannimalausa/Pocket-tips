@@ -25,6 +25,9 @@
     margin: 0;
     padding: 0;
 
+    /* Card variables */
+    --card-border-radius: 40px;
+
     @font-face {
         font-family: 'PP Fragment Variable';
         src: url(font/PPFragment-Variable.ttf);
@@ -58,6 +61,11 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     padding: 74px 90px;
 }
 
+.animatedLogoContainer {
+    height: 100%;
+    scale: 1.25;
+}
+
 .wrapper {
     margin: 0;
     position: fixed;
@@ -76,7 +84,7 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     width: 300px; /* former 180px */
     height: 450px; /* former 270px */
     position: absolute;
-    border-radius: 40px;
+    border-radius: var(--card-border-radius);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -283,7 +291,7 @@ h2 {
     position: fixed;
     bottom: 50px;
     right: 50px;
-    display: flex;
+    display: none; /* flex */
     flex-direction: row;
     gap: 32px;
 }
@@ -300,7 +308,10 @@ h2 {
 
 .cursor-left {
     cursor: url(res/pointers/pointer-arrow-left.svg), auto;
-    transform: rotate(180deg);
+}
+
+.cursor-cta {
+    cursor: url(res/pointers/pointer-callToa.png), auto;
 }
 
 .blue-card .face-wrapper {

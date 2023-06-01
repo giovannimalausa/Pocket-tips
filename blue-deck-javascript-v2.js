@@ -38,14 +38,19 @@ let blueCard4_deg = 0;
 let blueCard5_deg = 1.85; // far left
 let blueCard6_deg = -1.64; // left
 
-// CURRENT STATE
+// Carousel states
 let cardZeroPosition = 0;
 let calculatedPosition = 0;
 
+// Arrays
 const blueDeck = [blueCard0, blueCard1, blueCard2, blueCard3, blueCard4, blueCard5, blueCard6];
 const deckPositions_X = [blueCard0_x, blueCard1_x, blueCard2_x, blueCard3_x, blueCard4_x, blueCard5_x, blueCard6_x];
 const deckPositions_deg = [blueCard0_deg, blueCard1_deg, blueCard2_deg, blueCard3_deg, blueCard4_deg, blueCard5_deg, blueCard6_deg];
 
+// Small-icons in the deck cards
+let smallIcons = document.querySelectorAll('.small-icon');
+
+// Shows cards on load
 function showCards() {
     blueDeck.forEach((card) => {
         card.classList.remove('hidden-card');
@@ -90,7 +95,7 @@ for (let i = 0; i < blueDeck.length; i++) {
             console.log('Clicked on center card');
         }
     });
-}
+};
 
 
 // Pointer Event => All // Manualmente, premendo M
@@ -128,15 +133,27 @@ function switchToFace() {
             duration: 0.5,
         })        
     });
-}
+};
 
 
 // Click on the right button to navigate right
 buttonRight.addEventListener('click', navigateRight);
 
+// Use the arrow keys to navigate right and left
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight') {
+        navigateRight();
+    } else if (event.key === 'ArrowLeft') {
+        navigateLeft();
+    }
+});
+
 // Function that manages the navigation to the right
 function navigateRight() {
     console.log('Navigate right');
+
+    // Play animation of small icons
+    rotateSmallIconsRight.restart();
 
     for (let i = 0; i < blueDeck.length; i++) {
         const card = blueDeck[i];
@@ -196,6 +213,9 @@ buttonLeft.addEventListener('click', navigateLeft);
 // Function that manages the navigation to the left
 function navigateLeft() {
     console.log('Navigate left');
+
+    // Play animation of small icons
+    rotateSmallIconsLeft.restart();
 
     for (let i = 0; i < blueDeck.length; i++) {
         const card = blueDeck[i];
@@ -261,11 +281,10 @@ function resetOpacity() {
 }
 
 // Add custom cursor when hovering on cards
-// Add a click event listener to each card
 for (let i = 0; i < blueDeck.length; i++) {
     const card = blueDeck[i];
 
-    // Add a click event listener to each card
+    // Add a hover event listener to each card
     card.addEventListener('mouseover', function hoverOnCard() {
         console.log('Hover on card');
         
@@ -279,15 +298,78 @@ for (let i = 0; i < blueDeck.length; i++) {
         console.log('TranslateX of hovered card is = ' + translateX);
         if (translateX > 0) {
             card.classList.remove("cursor-left");
+            card.classList.remove("cursor-cta");
             card.classList.add("cursor-right");
         } else if (translateX < 0) {
             card.classList.remove("cursor-right");
+            card.classList.remove("cursor-cta");
             card.classList.add("cursor-left");
         } else {
             card.classList.remove("cursor-right");
             card.classList.remove("cursor-left");
+            card.classList.add("cursor-cta");
             console.log('Hovering on center card');
         }
 
     });
 }
+
+// window.addEventListener('mousemove', (event) => {
+//     cursor.style.left = event.clientX;
+//     cursor.style.top = event.clientY;
+//     // Vedi tutorial qui https://www.youtube.com/watch?v=7JR2VFu-9KQ
+// });
+
+// Rotate animation of small icons in the deck
+// When going LEFT <<<<-------
+let rotateSmallIconsLeft = gsap.to(smallIcons, {
+    keyframes: {
+        x: [0, -10, 0],
+        rotate: [0, -360, 0],
+        ease: 'back',
+    },
+    duration: 3,
+    paused: true,
+});
+// When going RIGHT ------>>>>
+let rotateSmallIconsRight = gsap.to(smallIcons, {
+    keyframes: {
+        x: [0, 10, 0],
+        rotate: [0, 360, 0],
+        ease: 'back',
+    },
+    duration: 3,
+    paused: true,
+});
+
+// Play the rotateSmallIcons animation when pressing the 'a' key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'a' || event.key === 'A') {
+        console.log('Rotate small icons');
+        rotateSmallIcons.restart();
+        // rotateSmallIcons.play();
+    }
+});
+
+
+
+// Logo animation
+
+// keyframes
+var blueLogoKeyframe = 313;
+var greenLogoKeyframe = 32;
+var pinkLogoKeyframe = 90;
+var yellowLogoKeyframe = 248;
+var redLogoKeyframe = 190;
+var whiteLogoKeyframe = 136;
+
+var logoAnimation = bodymovin.loadAnimation({
+    container: document.getElementById('animatedLogoContainer'),
+    renderer: 'svg',
+    loop: true,
+    autoplay: false,
+    path: 'res/logo/animatedLogo_puntoColorato.json'
+});
+
+// Stop the animation on blueLogoKeyframe
+logoAnimation.goToAndStop(blueLogoKeyframe, true);
