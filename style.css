@@ -302,16 +302,14 @@ h2 {
     padding: 10px;
 }
 
-.cursor-right {
-    cursor: url(res/pointers/pointer-arrow-right.svg), auto;
-}
-
-.cursor-left {
-    cursor: url(res/pointers/pointer-arrow-left.svg), auto;
-}
-
-.cursor-cta {
-    cursor: url(res/pointers/pointer-callToa.png), auto;
+.cursor {
+    position: absolute;
+    left: 100px;
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    z-index: 100;
+    pointer-events: none;
 }
 
 .blue-card .face-wrapper {

@@ -80,7 +80,7 @@ let blueToCenter = gsap.fromTo(".blue-card.cover.main-cover", {
 });
 
 let yellowToCenter = gsap.fromTo(".yellow-card.cover.main-cover", {
-    x: -700,
+    x: -500,
     y: 300,
     rotate: -45,
 },
@@ -113,14 +113,14 @@ let greenToCenter = gsap.fromTo(".green-card.cover.main-cover", {
 // Animazione card extra
 const extraCards = document.querySelectorAll(".extra");
 const extraCards_positions = [
-    {x: gsap.utils.random(-300, -250, 1), y: gsap.utils.random(125, 100, 1), angle: gsap.utils.random(-15, -5, 1)}, // verde
-    {x: gsap.utils.random(50, 100, 1), y: gsap.utils.random(300, 400, 1), angle: gsap.utils.random(-80, 45, 5)},
+    {x: gsap.utils.random(-850, -700, 1), y: gsap.utils.random(125, 100, 1), angle: gsap.utils.random(-15, -5, 1)}, // verde
+    {x: gsap.utils.random(-50, 50, 1), y: gsap.utils.random(300, 400, 1), angle: gsap.utils.random(-80, 45, 5)},
     {x: gsap.utils.random(300, 400, 1), y: gsap.utils.random(0, 100, 1), angle: gsap.utils.random(-45, 45, 5)},
-    {x: gsap.utils.random(500, 700, 1), y: gsap.utils.random(700, 700, 1), angle: gsap.utils.random(-45, 45, 5)},
+    {x: gsap.utils.random(725, 850, 1), y: gsap.utils.random(700, 700, 1), angle: gsap.utils.random(-45, 45, 5)},
     {x: gsap.utils.random(-400, -300, 1), y: gsap.utils.random(700, 700, 1), angle: gsap.utils.random(-45, 45, 5)},
-    {x: gsap.utils.random(100, 300, 1), y: gsap.utils.random(-700, -700, 1), angle: gsap.utils.random(-45, 45, 5)},
+    {x: gsap.utils.random(100, 300, 1), y: gsap.utils.random(600, 700, 1), angle: gsap.utils.random(-45, 45, 5)},
     {x: gsap.utils.random(200, 400, 1), y: gsap.utils.random(-450, -400, 1), angle: gsap.utils.random(-45, 45, 5)},
-    {x: gsap.utils.random(-800, -700, 1), y: gsap.utils.random(-600, -550, 1), angle: gsap.utils.random(-45, 45, 5)}, // ok (gialla alto dx)
+    {x: gsap.utils.random(-800, -700, 1), y: gsap.utils.random(-600, -550, 1), angle: gsap.utils.random(-45, -35, 5)}, // ok (gialla alto dx)
     {x: gsap.utils.random(600, 800, 1), y: gsap.utils.random(-700, -500, 1), angle: gsap.utils.random(-0, 0, 5)}, // rosa
     {x: gsap.utils.random(-500, -400, 1), y: gsap.utils.random(-700, -700, 1), angle: gsap.utils.random(-45, 45, 5)},
 ];

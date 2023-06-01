@@ -297,28 +297,30 @@ for (let i = 0; i < blueDeck.length; i++) {
         
         console.log('TranslateX of hovered card is = ' + translateX);
         if (translateX > 0) {
-            card.classList.remove("cursor-left");
-            card.classList.remove("cursor-cta");
-            card.classList.add("cursor-right");
+            // Custom cursor
+            card.addEventListener('mousemove', (event) => {
+                let cursor = document.getElementById('cursor');
+                let cursorOffsetX = cursor.getBoundingClientRect().width / 2;
+                let cursorOffsetY = cursor.getBoundingClientRect().height / 2;
+                cursor.style.left = event.clientX - cursorOffsetX + 'px';
+                cursor.style.top = event.clientY - cursorOffsetY + 'px';
+                console.log('Mouse position: X = ' + event.clientX + ', Y = ' + event.clientY);
+            });
         } else if (translateX < 0) {
-            card.classList.remove("cursor-right");
-            card.classList.remove("cursor-cta");
-            card.classList.add("cursor-left");
+            card.addEventListener('mousemove', (event) => {
+                let cursor = document.getElementById('cursor');
+                let cursorOffsetX = cursor.getBoundingClientRect().width / 2;
+                let cursorOffsetY = cursor.getBoundingClientRect().height / 2;
+                cursor.style.left = event.clientX - cursorOffsetX + 'px';
+                cursor.style.top = event.clientY - cursorOffsetY + 'px';
+                console.log('Mouse position: X = ' + event.clientX + ', Y = ' + event.clientY);
+            });
         } else {
-            card.classList.remove("cursor-right");
-            card.classList.remove("cursor-left");
-            card.classList.add("cursor-cta");
             console.log('Hovering on center card');
         }
 
     });
 }
-
-// window.addEventListener('mousemove', (event) => {
-//     cursor.style.left = event.clientX;
-//     cursor.style.top = event.clientY;
-//     // Vedi tutorial qui https://www.youtube.com/watch?v=7JR2VFu-9KQ
-// });
 
 // Rotate animation of small icons in the deck
 // When going LEFT <<<<-------
@@ -347,7 +349,6 @@ document.addEventListener('keydown', function(event) {
     if (event.key === 'a' || event.key === 'A') {
         console.log('Rotate small icons');
         rotateSmallIcons.restart();
-        // rotateSmallIcons.play();
     }
 });
 
