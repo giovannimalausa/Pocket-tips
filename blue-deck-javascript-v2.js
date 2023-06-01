@@ -50,6 +50,11 @@ const deckPositions_deg = [blueCard0_deg, blueCard1_deg, blueCard2_deg, blueCard
 // Small-icons in the deck cards
 let smallIcons = document.querySelectorAll('.small-icon');
 
+// Custom cursor
+let cursor = document.getElementById('cursor');
+let cursorRight = document.querySelector('.cursor-right');
+let cursorLeft = document.querySelector('.cursor-left');
+
 // Shows cards on load
 function showCards() {
     blueDeck.forEach((card) => {
@@ -280,13 +285,50 @@ function resetOpacity() {
     }, 200);
 }
 
+// Custom cursor definition
+window.addEventListener('mousemove', (event) => {
+    let cursorOffsetX = cursor.getBoundingClientRect().width / 2;
+    let cursorOffsetY = cursor.getBoundingClientRect().height / 2;
+    cursor.style.left = event.clientX - cursorOffsetX + 'px';
+    cursor.style.top = event.clientY - cursorOffsetY + 'px';
+    // console.log('Mouse position: X = ' + event.clientX + ', Y = ' + event.clientY);
+
+
+    // Using gsap animation to Rotate cursor so it always points to the point the half way of the right side of the window
+    if (event.clientX > window.innerWidth/2) {
+        // defining angle of rotation
+        let angle = Math.atan2(event.clientY - window.innerHeight/2, window.innerWidth/2 - event.clientX);
+        console.log('Angle = ' + angle);
+        // converting angle from radians to degrees
+        angle = angle * 180 / Math.PI;
+        // rotating cursor
+        gsap.to(cursor, {
+            rotate: angle+180,
+            duration: 0.1,
+        })
+    } else if (event.clientX < window.innerWidth/2) {   // Using gsap animation to Rotate cursor so it always points to the point the half way of the right side of the window
+    
+        // defining angle of rotation
+        let angle = Math.atan2(event.clientY - window.innerHeight/2, event.clientX);
+        // converting angle from radians to degrees
+        angle = angle * 180 / Math.PI;
+        // rotating cursor
+        gsap.to(cursor, {
+            rotate: angle,
+            duration: 0.1,
+        })
+    }
+
+});
+
 // Add custom cursor when hovering on cards
 for (let i = 0; i < blueDeck.length; i++) {
     const card = blueDeck[i];
 
     // Add a hover event listener to each card
-    card.addEventListener('mouseover', function hoverOnCard() {
+    card.addEventListener('mouseenter', function hoverOnCard() {
         console.log('Hover on card');
+        cursor.style.opacity = 1;
         
         console.log('Hovering on card with transform = ' + this.style.transform);
         let transformPropertyofClickedElement = this.style.transform;
@@ -297,27 +339,32 @@ for (let i = 0; i < blueDeck.length; i++) {
         
         console.log('TranslateX of hovered card is = ' + translateX);
         if (translateX > 0) {
-            // Custom cursor
-            card.addEventListener('mousemove', (event) => {
-                let cursor = document.getElementById('cursor');
-                let cursorOffsetX = cursor.getBoundingClientRect().width / 2;
-                let cursorOffsetY = cursor.getBoundingClientRect().height / 2;
-                cursor.style.left = event.clientX - cursorOffsetX + 'px';
-                cursor.style.top = event.clientY - cursorOffsetY + 'px';
-                console.log('Mouse position: X = ' + event.clientX + ', Y = ' + event.clientY);
-            });
+            cursor.style.opacity = 1;
+            // Show right cursor
+            cursorRight.style.display = 'block';
+            // Hide left cursor
+            cursorLeft.style.display = 'none';
+            
+            
         } else if (translateX < 0) {
-            card.addEventListener('mousemove', (event) => {
-                let cursor = document.getElementById('cursor');
-                let cursorOffsetX = cursor.getBoundingClientRect().width / 2;
-                let cursorOffsetY = cursor.getBoundingClientRect().height / 2;
-                cursor.style.left = event.clientX - cursorOffsetX + 'px';
-                cursor.style.top = event.clientY - cursorOffsetY + 'px';
-                console.log('Mouse position: X = ' + event.clientX + ', Y = ' + event.clientY);
-            });
+            cursor.style.opacity = 1;
+            // Show left cursor
+            cursorLeft.style.display = 'block';
+            // Hide right cursor
+            cursorRight.style.display = 'none';
         } else {
+            // Hide right cursor
+            cursorRight.style.display = 'none';
+            // Hide left cursor
+            cursorLeft.style.display = 'none';
             console.log('Hovering on center card');
         }
+    });
+
+    card.addEventListener('mouseleave', function hoverOffCard() {
+        console.log('Hover off card');
+        // Hide custom cursor
+        cursor.style.opacity = 0;
 
     });
 }

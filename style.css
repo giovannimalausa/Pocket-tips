@@ -48,6 +48,10 @@ body {
     scrollbar-width: none;  /* Hide scroll bar in Firefox */
 }
 
+.blue-body {
+    height: auto;
+}
+
 body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     display: none;
 }
@@ -90,6 +94,7 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     align-items: center;
     box-shadow: var(--shadow-1);
     overflow: hidden;
+    cursor: none;
 }
 
 .card .vector {
@@ -305,11 +310,17 @@ h2 {
 .cursor {
     position: absolute;
     left: 100px;
-    width: 50px;
-    height: 50px;
-    background-color: red;
+    width: 70px;
+    height: 70px;
     z-index: 100;
     pointer-events: none;
+    opacity: 0;
+    transition: top 0.01s ease-in-out, left 0.01s ease-in-out, opacity .2s ease-in-out;
+}
+
+.cursor img {
+    width: 100%;
+    height: 100%;
 }
 
 .blue-card .face-wrapper {
