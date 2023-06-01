@@ -78,6 +78,20 @@ function showCards() {
 }
 showCards();
 
+function showMenu() {
+    let menuButton = document.querySelector('.menu-button');
+    let showMenuAnimation = gsap.fromTo(menuButton, {
+        opacity: 0,
+        x: 20,
+    }, {opacity: 1,
+        x: 0,
+        duration: 1,
+        ease: 'back',
+    });
+    showMenuAnimation.play();
+}
+showMenu();
+
 
 for (let i = 0; i < blueDeck.length; i++) {
     const card = blueDeck[i];
