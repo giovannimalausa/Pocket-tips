@@ -13,8 +13,8 @@ let blueCard6 = document.querySelector(".blue-card.card-6");
 
 // Posizioni predefinite, senza unità di misura
 let position_0_x_value = 0; 
-let position_1_x_value = 22;
-let position_2_x_value = 42;
+let position_1_x_value = 24;
+let position_2_x_value = 46;
 let position_3_x_value = 65;
 let position_4_x_value = '-'+position_3_x_value;
 let position_5_x_value = '-'+position_2_x_value;
@@ -78,8 +78,10 @@ function showCards() {
 }
 showCards();
 
-function showMenu() {
-    let menuButton = document.querySelector('.menu-button');
+// Menu animation
+let menuButton = document.querySelector('.menu-button');
+
+function showMenuButton() {
     let showMenuAnimation = gsap.fromTo(menuButton, {
         opacity: 0,
         x: 20,
@@ -90,7 +92,7 @@ function showMenu() {
     });
     showMenuAnimation.play();
 }
-showMenu();
+showMenuButton();
 
 
 for (let i = 0; i < blueDeck.length; i++) {
@@ -435,3 +437,10 @@ var logoAnimation = bodymovin.loadAnimation({
 
 // Stop the animation on blueLogoKeyframe
 logoAnimation.goToAndStop(blueLogoKeyframe, true);
+
+// Menu animation
+menuButton.addEventListener('click', function() {
+    // Toggle menu by adding/removing class 'full-screen-menu-hidden'
+    let fullScreenMenu = document.querySelector('.full-screen-menu');
+    fullScreenMenu.classList.toggle('full-screen-menu-hidden');
+});

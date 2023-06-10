@@ -114,8 +114,9 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     position: absolute;
     font-family: 'PP Fragment', sans-serif;
     font-weight: 400;
-    color: white;
+    color: #FFFFFF;
     font-size: 40px;
+    transition: color 0.5s ease-in-out;
 }
 
 .cat-title-hidden {
@@ -133,11 +134,11 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
 /* Testo del Nome categoria  */
 .nome-categoria > * {
     font-family: 'PP Fragment', sans-serif;
-    font-weight: 450;
+    font-weight: 400;
     color: var(--blue-primary);
     font-size: 130px;
     font-variation-settings: 'srff' 0;
-    padding-bottom: 600px;
+    transform: translateY(-300px);
     opacity: 0.2;
 }
 
@@ -389,4 +390,62 @@ h2 {
 
 .blue-card .face-wrapper {
     background-color: var(--blue-secondary);
+}
+
+/*
+   M   M  EEEE  N   N  U   U 
+   MM MM  E     NN  N  U   U 
+   M M M  EEE   N N N  U   U 
+   M   M  E     N  NN  U   U 
+   M   M  EEEE  N   N   UUU  
+                       
+*/
+
+.full-screen-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    transition: .5s;
+}
+
+.full-screen-menu-hidden {
+    transform: translateY(-100VH);
+}
+
+.categories-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    height: 100%;
+    padding: 0 16px;
+}
+
+.categories-list a {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+
+.menu-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    color: white;
+}
+
+.menu-footer a {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
 }

@@ -14,6 +14,8 @@ let greenCard = document.querySelector(".green-single-card-wrapper");
 let redCard = document.querySelector(".red-single-card-wrapper");
 let pinkCard = document.querySelector(".pink-single-card-wrapper");
 
+let blueCardNoLabel = document.querySelector(".blue-card.cover.main-cover");
+
 // Definizione array contenente le "MAIN CARDS"
 const mainCards_blue = [blueCard, yellowCard, greenCard, redCard, pinkCard];
 
@@ -522,7 +524,14 @@ pinkCard.addEventListener("mouseleave", function() {
 });
 
 
+
 // ON CLICK
+
+//   OOOOO  NN   NN    CCCCC  LL      IIIII  CCCCC  KK  KK 
+//  OO   OO NNN  NN   CC      LL       III  CC      KK KK  
+//  OO   OO NN N NN   CC      LL       III  CC      KKKK   
+//  OO   OO NN  NNN   CC      LL       III  CC      KK KK  
+//   OOOO0  NN   NN    CCCCC  LLLLLLL IIIII  CCCCC  KK  KK 
 
 blueCard.addEventListener("click", function() {
     console.log("Blue was clicked.")
@@ -533,14 +542,27 @@ blueCard.addEventListener("click", function() {
         duration: 2,
     })
 
-    let blueScaleUp = gsap.to(blueCard, {
+    let blueScaleUp = gsap.to(blueCardNoLabel, {
         scale: 1.25,
         x: 0,
-        y: 0,
+        y: 125,
         rotate: 0,
         duration: 1,
         ease: "back",
+        paused: true,
         onComplete: goToPage,
+    })
+
+    let blueCatTitle = document.querySelector(".blue-cat-title");
+    let blueCatTitleAnimation = gsap.to(blueCatTitle, {
+        'font-size': '130px',
+        'font-variation-settings': "'srff' 0",
+        opacity: 0.2,
+        y: -175, // questo è il risultato di un conto del cazzo -300 + 125 = -175
+        // qui andrebbe messa l'animazione del colore, ma non riesco a farla funzionare
+        margin: 0,
+        duration: 1,
+        paused: true,
     })
 
     
@@ -548,9 +570,11 @@ blueCard.addEventListener("click", function() {
     
     blueClicked.play();
     blueScaleUp.play();
+    blueCatTitleAnimation.play();
 });
 
 function goToPage() {
+
     setTimeout(window.location.href = "blue-deck.html", 1000);
     console.log("Cambio pagina")
 }
