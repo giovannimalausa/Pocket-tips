@@ -101,7 +101,22 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     overflow: hidden;
 }
 
+.cat-titles-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .cat-title {
+    position: absolute;
+    font-family: 'PP Fragment', sans-serif;
+    font-weight: 450;
+    color: white;
+    font-size: 40px;
+}
+
+.cat-title-hidden {
     display: none;
 }
 
@@ -118,10 +133,16 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     font-family: 'PP Fragment', sans-serif;
     font-weight: 450;
     color: var(--blue-primary);
-    font-size: 150px;
+    font-size: 130px;
     font-variation-settings: 'srff' 0;
     padding-bottom: 600px;
     opacity: 0.2;
+}
+
+.single-card-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .card {
