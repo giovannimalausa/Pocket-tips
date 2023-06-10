@@ -190,26 +190,26 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     background-color: var(--green-primary);
 }
 
-.pink-card.main-cover {
+.pink-card.main-cover, .pink-single-card-wrapper {
     z-index: 31;
 }
 
-.red-card.main-cover {
+.red-card.main-cover, .red-single-card-wrapper{
     rotate: 5deg;
     z-index: 32;
 }
 
-.blue-card.main-cover {
+.blue-card.main-cover, .blue-single-card-wrapper {
     transform: rotateZ(-0deg);
     z-index: 34;
 }
 
-.yellow-card.main-cover {
+.yellow-card.main-cover, .yellow-single-card-wrapper {
     transform: rotateZ(-1deg);
     z-index: 35;
 }
 
-.green-card.main-cover {
+.green-card.main-cover, .green-single-card-wrapper {
     rotate: 3deg;
     z-index: 36;
 }

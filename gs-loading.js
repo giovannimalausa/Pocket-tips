@@ -2,11 +2,18 @@
 let angoloRotazione = 45;
 
 // Definizione variabili per gli oggetti "MAIN CARDS"
-let blueCard = document.querySelector(".blue-card.cover.main-cover");
-let yellowCard = document.querySelector(".yellow-card.cover.main-cover");
-let greenCard = document.querySelector(".green-card.cover.main-cover");
-let redCard = document.querySelector(".red-card.cover.main-cover");
-let pinkCard = document.querySelector(".pink-card.cover.main-cover");
+// let blueCard = document.querySelector(".blue-card.cover.main-cover");
+// let yellowCard = document.querySelector(".yellow-card.cover.main-cover");
+// let greenCard = document.querySelector(".green-card.cover.main-cover");
+// let redCard = document.querySelector(".red-card.cover.main-cover");
+// let pinkCard = document.querySelector(".pink-card.cover.main-cover");
+
+let blueCard = document.querySelector(".blue-single-card-wrapper");
+let yellowCard = document.querySelector(".yellow-single-card-wrapper");
+let greenCard = document.querySelector(".green-single-card-wrapper");
+let redCard = document.querySelector(".red-single-card-wrapper");
+let pinkCard = document.querySelector(".pink-single-card-wrapper");
+
 // Definizione array contenente le "MAIN CARDS"
 const mainCards_blue = [blueCard, yellowCard, greenCard, redCard, pinkCard];
 
@@ -40,7 +47,7 @@ let extraCardsToCenterAnimations = [];
 
 // Animazioni che portano le MAIN CARDS al centro
 // ===| Pink |===
-let pinkToCenter = gsap.fromTo(".pink-card.cover.main-cover", {
+let pinkToCenter = gsap.fromTo(pinkCard, {
     x: -500, // x di partenza
     y: -205, // y di partenza
     rotate: -15, // angolo di partenza
@@ -55,7 +62,7 @@ let pinkToCenter = gsap.fromTo(".pink-card.cover.main-cover", {
     paused: true, // animazione in pausa
 });
 // ===| Red |===
-let redToCenter = gsap.fromTo(".red-card.cover.main-cover", {
+let redToCenter = gsap.fromTo(redCard, {
     x: 600,
     y: 205,
     rotate: 30,
@@ -70,7 +77,7 @@ let redToCenter = gsap.fromTo(".red-card.cover.main-cover", {
     paused: true,
 });
 // ===| Blue |===
-let blueToCenter = gsap.fromTo(".blue-card.cover.main-cover", {
+let blueToCenter = gsap.fromTo(blueCard, {
     x: 620,
     y: -300,
     rotate: -20,
@@ -85,7 +92,7 @@ let blueToCenter = gsap.fromTo(".blue-card.cover.main-cover", {
     paused: true,
 });
 // ===| Yellow |===
-let yellowToCenter = gsap.fromTo(".yellow-card.cover.main-cover", {
+let yellowToCenter = gsap.fromTo(yellowCard, {
     x: -500,
     y: 300,
     rotate: -45,
@@ -100,7 +107,7 @@ let yellowToCenter = gsap.fromTo(".yellow-card.cover.main-cover", {
     paused: true,
 });
 // ===| Green |===
-let greenToCenter = gsap.fromTo(".green-card.cover.main-cover", {
+let greenToCenter = gsap.fromTo(greenCard, {
     x: -50,
     y: -295,
     rotate: -45,
@@ -157,7 +164,7 @@ for (var i = 0; i < extraCards.length; i++) {
 // ============  Animazioni ventaglio ============
 
 // ===| Pink |===
-let pink = gsap.to(".pink-card.cover.main-cover", {
+let pink = gsap.to(pinkCard, {
     x: -outer_X,
     y: outer_Y,
     rotate: -outer_deg,
@@ -168,7 +175,7 @@ let pink = gsap.to(".pink-card.cover.main-cover", {
 });
 
 // ===| Red |===
-let red = gsap.to(".red-card.cover.main-cover", {
+let red = gsap.to(redCard, {
     x: -inner_X,
     y: inner_Y,
     rotate: -inner_deg,
@@ -179,7 +186,7 @@ let red = gsap.to(".red-card.cover.main-cover", {
 });
 
 // ===| Blue |===
-let blue = gsap.to(".blue-card.cover.main-cover", {
+let blue = gsap.to(blueCard, {
     x: center_X,
     y: center_Y,
     duration: 1,
@@ -189,7 +196,7 @@ let blue = gsap.to(".blue-card.cover.main-cover", {
 });
 
 // ===| Yellow |===
-let yellow = gsap.to(".yellow-card.cover.main-cover", {
+let yellow = gsap.to(yellowCard, {
     x: inner_X,
     y: inner_Y,
     rotate: inner_deg,
@@ -200,7 +207,7 @@ let yellow = gsap.to(".yellow-card.cover.main-cover", {
 });
 
 // ===| Green |===
-let green = gsap.to(".green-card.cover.main-cover", {
+let green = gsap.to(greenCard, {
     x: outer_X,
     y: outer_Y,
     rotate: outer_deg,
@@ -319,7 +326,7 @@ let blueCatTitle = gsap.fromTo(".blue-cat-title", {
     y: -180,
 }, {
     paused: true,
-    y: -390,
+    y: -250,
     duration: 0.2,
 })
 
@@ -365,8 +372,8 @@ let yellowCatTitle = gsap.fromTo(".yellow-cat-title", {
     rotate: inner_deg,
 }, {
     paused: true,
-    x: '+='+Math.cos(20)*350,
-    y: '-='+Math.sin(20)*350,
+    x: '+='+Math.cos(20)*200,
+    y: '-='+Math.sin(20)*200,
     duration: 0.2,
 })
 
