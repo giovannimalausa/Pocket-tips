@@ -304,7 +304,11 @@ function enableMouse() {
 
 // ============================================================
 // ===== Animazioni all'HOVER delle card [nella fan view] =====
-// ============================================================      
+// ============================================================     
+
+// Variabili labels
+const catTitleAnimationStartY = -200;
+const catTitleAnimationEndY = -260;
 
 // Blue card rises
 let enterBlue = gsap.to(blueCard, { // Animazione card blu
@@ -323,11 +327,12 @@ let rotateBlue = gsap.to(".blue-vector", { // Animazione vettore blu
 
 // blue-cat-title slides out animation
 let blueCatTitle = gsap.fromTo(".blue-cat-title", {
-    y: -180,
+    y: catTitleAnimationStartY,
 }, {
     paused: true,
-    y: -250,
+    y: catTitleAnimationEndY,
     duration: 0.2,
+    ease: "power3",
 })
 
 // On BLUE over
@@ -367,10 +372,10 @@ let rotateYellow = gsap.to(".yellow-vector", { // Animazione vettore blu
 
 // yellow-cat-title slides out animation
 let yellowCatTitle = gsap.fromTo(".yellow-cat-title", {
-    y: -200,
+    y: catTitleAnimationStartY,
 }, {
     paused: true,
-    y: -300,
+    y: catTitleAnimationEndY,
     duration: 0.2,
 })
 
@@ -389,6 +394,8 @@ yellowCard.addEventListener("mouseleave", function() {
 });
 
 // GREEN
+
+// Green card rises
 let enterGreen = gsap.to(greenCard, {
     paused: true,
     y: '-='+Math.sin(40)*60, 
@@ -397,24 +404,41 @@ let enterGreen = gsap.to(greenCard, {
     ease: "power3",
 })
 
+// Green vector rotates
 let rotateGreen = gsap.to(".green-vector", { // Animazione vettore blu
     paused: true,
     rotate: angoloRotazione,
     duration: 0.4,
 })
 
+// green-cat-title slides out animation
+let greenCatTitle = gsap.fromTo(".green-cat-title", {
+    y: catTitleAnimationStartY,
+}, {
+    paused: true,
+    y: catTitleAnimationEndY,
+    duration: 0.2,
+    ease: "power3",
+})
+
+// On GREEN over (event listeners)
 greenCard.addEventListener("mouseenter", function() {
     enterGreen.play();
     rotateGreen.play();
+    greenCatTitle.play();
     logoAnimation.goToAndStop(greenLogoKeyframe, true); // Animazione logo verde (stop)
 });
+
 greenCard.addEventListener("mouseleave", function() {
     enterGreen.reverse();
     rotateGreen.reverse();
+    greenCatTitle.reverse();
     logoAnimation.play(); 
 });
 
 // RED
+
+// Red card rises
 let enterRed = gsap.to(redCard, {
     paused: true,
     y: '-='+Math.sin(20)*60, 
@@ -423,24 +447,41 @@ let enterRed = gsap.to(redCard, {
     ease: "power3",
 });
 
+// Red vector rotates
 let rotateRed = gsap.to(".red-vector", { // Animazione vettore blu
     paused: true,
     rotate: angoloRotazione,
     duration: 0.4
 });
  
+// red-cat-title slides out animation
+let redCatTitle = gsap.fromTo(".red-cat-title", {
+    y: catTitleAnimationStartY,
+}, {
+    paused: true,
+    y: catTitleAnimationEndY,
+    duration: 0.2,
+    ease: "power3",
+})
+
+// On RED over (event listeners)
 redCard.addEventListener("mouseenter", function() {
     enterRed.play();
     rotateRed.play();
+    redCatTitle.play();
     logoAnimation.goToAndStop(redLogoKeyframe, true); // Animazione logo rosso (stop)
 });
+
 redCard.addEventListener("mouseleave", function() {
     enterRed.reverse();
     rotateRed.reverse();
+    redCatTitle.reverse();
     logoAnimation.play(); 
 });
 
 // PINK
+
+// Pink card rises
 let enterPink = gsap.to(pinkCard, {
     paused: true,
     y: '-='+Math.sin(40)*60, 
@@ -449,20 +490,34 @@ let enterPink = gsap.to(pinkCard, {
     ease: "power3",
 });
 
+// Pink vector rotates
 let rotatePink = gsap.to(".pink-vector", { // Animazione vettore blu
     paused: true,
     rotate: angoloRotazione,
     duration: 0.4
 });
 
+// pink-cat-title slides out animation
+let pinkCatTitle = gsap.fromTo(".pink-cat-title", {
+    y: catTitleAnimationStartY,
+}, {
+    paused: true,
+    y: catTitleAnimationEndY,
+    duration: 0.2,
+    ease: "power3",
+})
+
+// On PINK over (event listeners)
 pinkCard.addEventListener("mouseenter", function() {
     enterPink.play();
     rotatePink.play();
+    pinkCatTitle.play();
     logoAnimation.goToAndStop(pinkLogoKeyframe, true); // Animazione logo pink (stop)
 });
 pinkCard.addEventListener("mouseleave", function() {
     enterPink.reverse();
     rotatePink.reverse();
+    pinkCatTitle.reverse();
     logoAnimation.play(); 
 });
 
@@ -471,7 +526,7 @@ pinkCard.addEventListener("mouseleave", function() {
 
 blueCard.addEventListener("click", function() {
     console.log("Blue was clicked.")
-    let blueClicked = gsap.to([".pink-card.cover", ".red-card.cover", ".yellow-card.cover", ".green-card.cover"], {
+    let blueClicked = gsap.to([pinkCard, redCard, yellowCard, greenCard], {
         opacity: 0,
         y: 9000,
         paused: true,

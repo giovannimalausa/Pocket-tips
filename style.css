@@ -88,12 +88,13 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
 }
 
 .wrapper {
-    margin: 0;
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100dvh;
+    margin: 0;
+    padding-top: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -108,10 +109,11 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     align-items: center;
 }
 
+/* Titolo della categoria nella visualizzazione a ventaglio */
 .cat-title {
     position: absolute;
     font-family: 'PP Fragment', sans-serif;
-    font-weight: 450;
+    font-weight: 400;
     color: white;
     font-size: 40px;
 }
@@ -168,6 +170,7 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
 
 .main-cover {
     display: flex;
+    cursor: pointer;
 }
 
 .pink-card.cover {
@@ -190,26 +193,26 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     background-color: var(--green-primary);
 }
 
-.pink-card.main-cover, .pink-single-card-wrapper {
+.pink-single-card-wrapper {
     z-index: 31;
 }
 
-.red-card.main-cover, .red-single-card-wrapper{
+.red-single-card-wrapper{
     rotate: 5deg;
     z-index: 32;
 }
 
-.blue-card.main-cover, .blue-single-card-wrapper {
+.blue-single-card-wrapper {
     transform: rotateZ(-0deg);
     z-index: 34;
 }
 
-.yellow-card.main-cover, .yellow-single-card-wrapper {
+.yellow-single-card-wrapper {
     transform: rotateZ(-1deg);
     z-index: 35;
 }
 
-.green-card.main-cover, .green-single-card-wrapper {
+.green-single-card-wrapper {
     rotate: 3deg;
     z-index: 36;
 }
