@@ -367,13 +367,10 @@ let rotateYellow = gsap.to(".yellow-vector", { // Animazione vettore blu
 
 // yellow-cat-title slides out animation
 let yellowCatTitle = gsap.fromTo(".yellow-cat-title", {
-    x: inner_X,
-    y: inner_Y,
-    rotate: inner_deg,
+    y: -200,
 }, {
     paused: true,
-    x: '+='+Math.cos(20)*200,
-    y: '-='+Math.sin(20)*200,
+    y: -300,
     duration: 0.2,
 })
 
