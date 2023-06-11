@@ -129,15 +129,15 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     justify-content: center;
     align-items: center;
     width: 100vw;
+    white-space: nowrap;
 }
 
 /* Testo del Nome categoria  */
 .nome-categoria > * {
     font-family: 'PP Fragment', sans-serif;
-    font-weight: 400;
     color: var(--blue-primary);
     font-size: 130px;
-    font-variation-settings: 'srff' 0;
+    font-variation-settings: 'srff' 0, 'wght' 550;
     transform: translateY(-300px);
     opacity: 0.2;
 }

@@ -555,14 +555,16 @@ blueCard.addEventListener("click", function() {
 
     let blueCatTitle = document.querySelector(".blue-cat-title");
     let blueCatTitleAnimation = gsap.to(blueCatTitle, {
+        color: "#4E7BBE",
         'font-size': '130px',
-        'font-variation-settings': "'srff' 0",
-        opacity: 0.2,
+        'font-variation-settings': "'srff' 0, 'wght' 550",
+        opacity: .2,
         y: -175, // questo è il risultato di un conto del cazzo -300 + 125 = -175
-        // qui andrebbe messa l'animazione del colore, ma non riesco a farla funzionare
         margin: 0,
-        duration: 1,
+        duration: .8,
+        ease: "back",
         paused: true,
+        onComplete: d => {console.log("Animation completed.")}
     })
 
     
