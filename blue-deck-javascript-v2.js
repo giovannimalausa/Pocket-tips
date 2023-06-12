@@ -307,34 +307,6 @@ window.addEventListener('mousemove', (event) => {
     let cursorOffsetY = cursor.getBoundingClientRect().height / 2;
     cursor.style.left = event.clientX - cursorOffsetX + 'px';
     cursor.style.top = event.clientY - cursorOffsetY + 'px';
-    // console.log('Mouse position: X = ' + event.clientX + ', Y = ' + event.clientY);
-
-
-    // Using gsap animation to Rotate cursor so it always points to the point the half way of the right side of the window
-    if (event.clientX > window.innerWidth/2) {
-        // defining angle of rotation
-        let angle = Math.atan2(event.clientY - window.innerHeight/2, window.innerWidth/2 - event.clientX);
-        console.log('Angle = ' + angle);
-        // converting angle from radians to degrees
-        angle = angle * 180 / Math.PI;
-        // rotating cursor
-        gsap.to(cursor, {
-            rotate: angle+180,
-            duration: 0.1,
-        })
-    } else if (event.clientX < window.innerWidth/2) {   // Using gsap animation to Rotate cursor so it always points to the point the half way of the right side of the window
-    
-        // defining angle of rotation
-        let angle = Math.atan2(event.clientY - window.innerHeight/2, event.clientX);
-        // converting angle from radians to degrees
-        angle = angle * 180 / Math.PI;
-        // rotating cursor
-        gsap.to(cursor, {
-            rotate: angle,
-            duration: 0.1,
-        })
-    }
-
 });
 
 // Add custom cursor when hovering on cards
@@ -342,16 +314,17 @@ for (let i = 0; i < blueDeck.length; i++) {
     const card = blueDeck[i];
 
     // Add a hover event listener to each card
-    card.addEventListener('mouseenter', function hoverOnCard() {
+    card.addEventListener('mouseover', function hoverOnCard() {
         console.log('Hover on card');
         cursor.style.opacity = 1;
         
         console.log('Hovering on card with transform = ' + this.style.transform);
         let transformPropertyofClickedElement = this.style.transform;
-        // Isolate the first number in the transform property of the clicked element, which is the translateX value
-        const regex = /translate\((.*?)vw/g;
-        const match = regex.exec(transformPropertyofClickedElement);
-        const translateX = match ? match[1] : null;
+
+        const startIndex = transformPropertyofClickedElement.indexOf("translate(") + 10; // Adding 10 to skip "translate("
+        const endIndex = transformPropertyofClickedElement.indexOf("vw", startIndex);
+        const translateX = parseFloat(transformPropertyofClickedElement.slice(startIndex, endIndex));
+        
         
         console.log('TranslateX of hovered card is = ' + translateX);
         if (translateX > 0) {
@@ -368,22 +341,48 @@ for (let i = 0; i < blueDeck.length; i++) {
             cursorLeft.style.display = 'block';
             // Hide right cursor
             cursorRight.style.display = 'none';
-        } else {
-            // Hide right cursor
-            cursorRight.style.display = 'none';
-            // Hide left cursor
-            cursorLeft.style.display = 'none';
-            console.log('Hovering on center card');
         }
     });
-
-    card.addEventListener('mouseleave', function hoverOffCard() {
-        console.log('Hover off card');
-        // Hide custom cursor
-        cursor.style.opacity = 0;
-
-    });
 }
+
+
+// Add custom cursor when hovering on navigation space (background)
+
+// defining spaces
+let navigationSpace = document.querySelector('.navigationSpace');
+let rightSpace = document.querySelector('.right');
+let leftSpace = document.querySelector('.left');
+
+// Add a hover event listener to each space
+// Right space
+rightSpace.addEventListener('mouseover', function hoverOnRightSpace() {
+    console.log('Hover on right space');
+    cursor.style.opacity = 1;
+    // Show right cursor
+    cursorRight.style.display = 'block';
+    // Hide left cursor
+    cursorLeft.style.display = 'none';
+});
+rightSpace.addEventListener('click', navigateRight);
+
+// Left space
+leftSpace.addEventListener('mouseover', function hoverOnLeftSpace() {
+    console.log('Hover on left space');
+    cursor.style.opacity = 1;
+    // Show left cursor
+    cursorLeft.style.display = 'block';
+    // Hide right cursor
+    cursorRight.style.display = 'none';
+});
+leftSpace.addEventListener('click', navigateLeft);
+
+// Leaving Navigation space removes custom cursor
+navigationSpace.addEventListener('mouseleave', function() {
+    console.log('Mouse left navigation space');
+    cursorLeft.style.display = 'none';
+    cursorRight.style.display = 'none';
+});
+
 
 // Rotate animation of small icons in the deck
 // When going LEFT <<<<-------
