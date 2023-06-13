@@ -15,7 +15,10 @@ let redCard = document.querySelector(".red-single-card-wrapper");
 let pinkCard = document.querySelector(".pink-single-card-wrapper");
 
 let blueCardNoLabel = document.querySelector(".blue-card.cover.main-cover");
+let yellowCardNoLabel = document.querySelector(".yellow-card.cover.main-cover");
 let greenCardNoLabel = document.querySelector(".green-card.cover.main-cover");
+let redCardNoLabel = document.querySelector(".red-card.cover.main-cover");
+let pinkCardNoLabel = document.querySelector(".pink-card.cover.main-cover");
 
 // Definizione array contenente le "MAIN CARDS"
 const mainCards_blue = [blueCard, yellowCard, greenCard, redCard, pinkCard];
@@ -392,64 +395,68 @@ let yellowCatTitle = gsap.fromTo(".yellow-cat-title", {
 
 // On YELLOW over (event listeners)
 yellowCard.addEventListener("mouseenter", function() {
-    enterYellow.play();
-    rotateYellow.play();
-    yellowCatTitle.play();
-    logoAnimation.goToAndStop(yellowLogoKeyframe, true); // Animazione logo giallo (stop)
+    if (overable === true) {
+        enterYellow.play();
+        rotateYellow.play();
+        yellowCatTitle.play();
+        logoAnimation.goToAndStop(yellowLogoKeyframe, true); // Animazione logo giallo (stop)
+    }
 });
 yellowCard.addEventListener("mouseleave", function() {
-    enterYellow.reverse();
-    rotateYellow.reverse();
-    yellowCatTitle.reverse();
-    logoAnimation.play(); 
+    if (overable === true) {   
+        enterYellow.reverse();
+        rotateYellow.reverse();
+        yellowCatTitle.reverse();
+        logoAnimation.play(); 
+    }
 });
 
 // GREEN
 
-    // Green card rises
-    let enterGreen = gsap.to(greenCard, {
-        paused: true,
-        y: '-='+Math.sin(40)*60, 
-        x: '-='+Math.cos(40)*60, 
-        duration: 0.3,
-        ease: "power3",
-    })
+// Green card rises
+let enterGreen = gsap.to(greenCard, {
+    paused: true,
+    y: '-='+Math.sin(40)*60, 
+    x: '-='+Math.cos(40)*60, 
+    duration: 0.3,
+    ease: "power3",
+})
 
-    // Green vector rotates
-    let rotateGreen = gsap.to(".green-vector", { // Animazione vettore blu
-        paused: true,
-        rotate: angoloRotazione,
-        duration: 0.4,
-    })
+// Green vector rotates
+let rotateGreen = gsap.to(".green-vector", { // Animazione vettore blu
+    paused: true,
+    rotate: angoloRotazione,
+    duration: 0.4,
+})
 
-    // green-cat-title slides out animation
-    let greenCatTitle = gsap.fromTo(".green-cat-title", {
-        y: catTitleAnimationStartY,
-    }, {
-        paused: true,
-        y: catTitleAnimationEndY,
-        duration: 0.2,
-        ease: "power3",
-    })
+// green-cat-title slides out animation
+let greenCatTitle = gsap.fromTo(".green-cat-title", {
+    y: catTitleAnimationStartY,
+}, {
+    paused: true,
+    y: catTitleAnimationEndY,
+    duration: 0.2,
+    ease: "power3",
+})
 
-    // On GREEN over (event listeners)
-    greenCard.addEventListener("mouseenter", function() {
-        if (overable === true) {
-            enterGreen.play();
-            rotateGreen.play();
-            greenCatTitle.play();
-            logoAnimation.goToAndStop(greenLogoKeyframe, true); // Animazione logo verde (stop)
-        }
-    });
+// On GREEN over (event listeners)
+greenCard.addEventListener("mouseenter", function() {
+    if (overable === true) {
+        enterGreen.play();
+        rotateGreen.play();
+        greenCatTitle.play();
+        logoAnimation.goToAndStop(greenLogoKeyframe, true); // Animazione logo verde (stop)
+    }
+});
 
-    greenCard.addEventListener("mouseleave", function() {
-        if (overable === true) {
-            enterGreen.reverse();
-            rotateGreen.reverse();
-            greenCatTitle.reverse();
-            logoAnimation.play(); 
-        }
-    });
+greenCard.addEventListener("mouseleave", function() {
+    if (overable === true) {
+        enterGreen.reverse();
+        rotateGreen.reverse();
+        greenCatTitle.reverse();
+        logoAnimation.play(); 
+    }
+});
 
 
 
@@ -483,17 +490,21 @@ let redCatTitle = gsap.fromTo(".red-cat-title", {
 
 // On RED over (event listeners)
 redCard.addEventListener("mouseenter", function() {
-    enterRed.play();
-    rotateRed.play();
-    redCatTitle.play();
-    logoAnimation.goToAndStop(redLogoKeyframe, true); // Animazione logo rosso (stop)
+    if (overable === true) {
+        enterRed.play();
+        rotateRed.play();
+        redCatTitle.play();
+        logoAnimation.goToAndStop(redLogoKeyframe, true); // Animazione logo rosso (stop)
+    }
 });
 
 redCard.addEventListener("mouseleave", function() {
-    enterRed.reverse();
-    rotateRed.reverse();
-    redCatTitle.reverse();
-    logoAnimation.play(); 
+    if (overable === true) {
+        enterRed.reverse();
+        rotateRed.reverse();
+        redCatTitle.reverse();
+        logoAnimation.play(); 
+    }
 });
 
 // PINK
@@ -548,6 +559,8 @@ pinkCard.addEventListener("mouseleave", function() {
 //  OO   OO NN  NNN   CC      LL       III  CC      KK KK  
 //   OOOO0  NN   NN    CCCCC  LLLLLLL IIIII  CCCCC  KK  KK 
 
+// Click on blue category
+
 blueCard.addEventListener("click", function() {
     console.log("Blue was clicked.")
     let blueClicked = gsap.to([pinkCard, redCard, yellowCard, greenCard], {
@@ -590,6 +603,62 @@ blueCard.addEventListener("click", function() {
     blueCatTitleAnimation.play();
 });
 
+// Click on yellow category
+
+yellowCard.addEventListener("click", function() {
+    console.log("Blue was clicked.")
+    let yellowClicked = gsap.to([pinkCard, redCard, blueCard, greenCard], {
+        opacity: 0,
+        y: 9000,
+        paused: true,
+        duration: 2,
+    })
+
+    let yellowResetPosition = gsap.to(yellowCard, {
+        y: -125,
+        x: center_X,
+        rotate: 0,
+        duration: 1.2,
+        paused: true,
+        ease: "back",
+    })
+
+    let yellowScaleUp = gsap.to(yellowCardNoLabel, {
+        scale: 1.25,
+        x: 0,
+        y: 125,
+        rotate: 0,
+        duration: 1,
+        ease: "back",
+        paused: true,
+        onComplete: goToPage("blue"),
+    })
+
+    let yellowCatTitle = document.querySelector(".yellow-cat-title");
+    let yellowCatTitleAnimation = gsap.to(yellowCatTitle, {
+        color: "#F2BE58",
+        'font-size': '130px',
+        'font-variation-settings': "'srff' 0, 'wght' 550",
+        opacity: .2,
+        y: -175, // questo è il risultato di un conto del cazzo -300 + 125 = -175
+        margin: 0,
+        duration: .8,
+        ease: "back",
+        paused: true,
+        onComplete: d => {console.log("Animation completed.")}
+    })
+
+    
+    overable = false;
+    
+    yellowClicked.play();
+    yellowResetPosition.play();
+    yellowScaleUp.play();
+    yellowCatTitleAnimation.play();
+});
+
+// Click on green category
+
 greenCard.addEventListener("click", function() {
     console.log("Green was clicked.")
     overable = false;
@@ -606,14 +675,15 @@ greenCard.addEventListener("click", function() {
         y: -125,
         x: center_X,
         rotate: 0,
-        duration: 1,
+        duration: 1.2,
         paused: true,
+        ease: "back",
     })
 
     let greenScaleUp = gsap.to(greenCardNoLabel, {
         scale: 1.25,
         y: 125,
-        duration: 1,
+        duration: .8,
         ease: "back",
         paused: true,
         onComplete: goToPage("green"),
@@ -621,7 +691,7 @@ greenCard.addEventListener("click", function() {
 
     let greenCatTitle = document.querySelector(".green-cat-title");
     let greenCatTitleAnimation = gsap.to(greenCatTitle, {
-        color: "#4E7BBE",
+        color: "#72C0A2",
         'font-size': '130px',
         'font-variation-settings': "'srff' 0, 'wght' 550",
         opacity: .2,
@@ -639,19 +709,80 @@ greenCard.addEventListener("click", function() {
     greenCatTitleAnimation.play();
 });
 
+// Click on red category
+
+redCard.addEventListener("click", function() {
+    console.log("Green was clicked.")
+    overable = false;
+    // disableMouse();
+
+    let redClicked = gsap.to([pinkCard, greenCard, yellowCard, blueCard], {
+        opacity: 0,
+        y: 9000,
+        paused: true,
+        duration: 2,
+    })
+
+    let redResetPosition = gsap.to(redCard, {
+        y: -125,
+        x: center_X,
+        rotate: 0,
+        duration: 1.2,
+        paused: true,
+        ease: "back",
+    })
+
+    let redScaleUp = gsap.to(redCardNoLabel, {
+        scale: 1.25,
+        y: 125,
+        duration: .8,
+        ease: "back",
+        paused: true,
+        onComplete: goToPage("red"),
+    })
+
+    let redCatTitle = document.querySelector(".red-cat-title");
+    let redCatTitleAnimation = gsap.to(redCatTitle, {
+        color: "#ED6D44",
+        'font-size': '130px',
+        'font-variation-settings': "'srff' 0, 'wght' 550",
+        opacity: .2,
+        y: -175, // questo è il risultato di un conto del cazzo -300 + 125 = -175
+        margin: 0,
+        duration: .8,
+        ease: "back",
+        paused: true,
+        onComplete: d => {console.log("Animation completed.")}
+    })
+
+    redClicked.play();
+    redScaleUp.play();
+    redResetPosition.play();
+    redCatTitleAnimation.play();
+});
+
 function goToPage(color) {
 
     console.log("Cambio pagina")
     setTimeout(() => {
-        if (color === "green") {
-            console.log("Navigate to green.")
-            window.location.href = "green-deck.html";
-        } else if (color === "blue") {
+        if (color === "blue") {
             console.log("Navigate to blue.")
             window.location.href = "blue-deck.html";
+        } else if (color === "yellow") {
+            console.log("Navigate to yellow.")
+            window.location.href = "yellow-deck.html";
+        } else if (color === "green") {
+            console.log("Navigate to green.")
+            window.location.href = "/decks/green-deck.html";
+        } else if (color === "red") {
+            console.log("Navigate to red.")
+            window.location.href = "red-deck.html";
+        } else if (color === "pink") {
+            console.log("Navigate to pink.")
+            window.location.href = "pink-deck.html";
         }
     },
-    2000);
+    1500);
 }
 
 // Logo animation

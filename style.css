@@ -132,10 +132,29 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     white-space: nowrap;
 }
 
+.red-name > * {
+    color: var(--red-primary);
+}
+
+.blue-name > * {
+    color: var(--blue-primary);
+}
+
+.pink-name > * {
+    color: var(--pink-primary);
+}
+
+.yellow-name > * {
+    color: var(--yellow-primary);
+}
+
+.green-name > * {
+    color: var(--green-primary);
+}
+
 /* Testo del Nome categoria  */
 .nome-categoria > * {
     font-family: 'PP Fragment', sans-serif;
-    color: var(--blue-primary);
     font-size: 130px;
     font-variation-settings: 'srff' 0, 'wght' 550;
     transform: translateY(-300px);

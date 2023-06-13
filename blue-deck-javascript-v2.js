@@ -3,13 +3,13 @@ const buttonRight = document.querySelector('.button-right');
 const buttonLeft = document.querySelector('.button-left');
 
 // Card
-let blueCard0 = document.querySelector(".blue-card.card-0");
-let blueCard1 = document.querySelector(".blue-card.card-1");
-let blueCard2 = document.querySelector(".blue-card.card-2");
-let blueCard3 = document.querySelector(".blue-card.card-3");
-let blueCard4 = document.querySelector(".blue-card.card-4");
-let blueCard5 = document.querySelector(".blue-card.card-5");
-let blueCard6 = document.querySelector(".blue-card.card-6");
+let card0 = document.querySelector(".card-0");
+let card1 = document.querySelector(".card-1");
+let card2 = document.querySelector(".card-2");
+let card3 = document.querySelector(".card-3");
+let card4 = document.querySelector(".card-4");
+let card5 = document.querySelector(".card-5");
+let card6 = document.querySelector(".card-6");
 
 // Posizioni predefinite, senza unità di misura
 let position_0_x_value = 0; 
@@ -21,31 +21,31 @@ let position_5_x_value = '-'+position_2_x_value;
 let position_6_x_value = '-'+position_1_x_value;
 
 // Posizioni predefinite
-let blueCard0_x = position_0_x_value + 'vw'; 
-let blueCard1_x = position_1_x_value + 'vw';
-let blueCard2_x = position_2_x_value + 'vw';
-let blueCard3_x = position_3_x_value + 'vw';
-let blueCard4_x = '-'+blueCard3_x;
-let blueCard5_x = '-'+blueCard2_x;
-let blueCard6_x = '-'+blueCard1_x;
+let card0_x = position_0_x_value + 'vw'; 
+let card1_x = position_1_x_value + 'vw';
+let card2_x = position_2_x_value + 'vw';
+let card3_x = position_3_x_value + 'vw';
+let card4_x = '-'+card3_x;
+let card5_x = '-'+card2_x;
+let card6_x = '-'+card1_x;
 
 // Angoli predefiniti
-let blueCard0_deg = 0; // center
-let blueCard1_deg = 0.93; // right
-let blueCard2_deg = -1.32; // far right
-let blueCard3_deg = 21;
-let blueCard4_deg = 0;
-let blueCard5_deg = 1.85; // far left
-let blueCard6_deg = -1.64; // left
+let card0_deg = 0; // center
+let card1_deg = 0.93; // right
+let card2_deg = -1.32; // far right
+let card3_deg = 21;
+let card4_deg = 0;
+let card5_deg = 1.85; // far left
+let card6_deg = -1.64; // left
 
 // Carousel states
 let cardZeroPosition = 0;
 let calculatedPosition = 0;
 
 // Arrays
-const blueDeck = [blueCard0, blueCard1, blueCard2, blueCard3, blueCard4, blueCard5, blueCard6];
-const deckPositions_X = [blueCard0_x, blueCard1_x, blueCard2_x, blueCard3_x, blueCard4_x, blueCard5_x, blueCard6_x];
-const deckPositions_deg = [blueCard0_deg, blueCard1_deg, blueCard2_deg, blueCard3_deg, blueCard4_deg, blueCard5_deg, blueCard6_deg];
+const deck = [card0, card1, card2, card3, card4, card5, card6];
+const deckPositions_X = [card0_x, card1_x, card2_x, card3_x, card4_x, card5_x, card6_x];
+const deckPositions_deg = [card0_deg, card1_deg, card2_deg, card3_deg, card4_deg, card5_deg, card6_deg];
 
 // Small-icons in the deck cards
 let smallIcons = document.querySelectorAll('.small-icon');
@@ -57,12 +57,12 @@ let cursorLeft = document.querySelector('.cursor-left');
 
 // Shows cards on load
 function showCards() {
-    blueDeck.forEach((card) => {
+    deck.forEach((card) => {
         card.classList.remove('hidden-card');
     });
 
-    for (let i = 0; i < blueDeck.length; i++) {
-        const card = blueDeck[i];
+    for (let i = 0; i < deck.length; i++) {
+        const card = deck[i];
         const card_X = deckPositions_X[i];
         const card_deg = deckPositions_deg[i];
         
@@ -95,8 +95,8 @@ function showMenuButton() {
 showMenuButton();
 
 
-for (let i = 0; i < blueDeck.length; i++) {
-    const card = blueDeck[i];
+for (let i = 0; i < deck.length; i++) {
+    const card = deck[i];
 
     // Add a click event listener to each card
     card.addEventListener('click', function clickOnCard() {
@@ -133,7 +133,7 @@ let vector = document.querySelectorAll('.vector');
 
 let vectorScale = gsap.to(vector, {
     delay: .3,
-    scale: 5,
+    scale: 8,
     duration: 1,
     rotate: 180,
     ease: 'back',
@@ -141,7 +141,7 @@ let vectorScale = gsap.to(vector, {
 });
 
 function switchToFace() {
-    blueDeck.forEach((card) => {
+    deck.forEach((card) => {
         // Add the class 'face-wrapper' to child element that already has the class 'face'
         card.children[0].classList.add('hide');
         // Avoid card flashing blue
@@ -176,8 +176,8 @@ function navigateRight() {
     // Play animation of small icons
     rotateSmallIconsRight.restart();
 
-    for (let i = 0; i < blueDeck.length; i++) {
-        const card = blueDeck[i];
+    for (let i = 0; i < deck.length; i++) {
+        const card = deck[i];
 
         calculatedPosition = i-1+cardZeroPosition;
         // if calculatedPosition is negative, add 7 to it
@@ -238,8 +238,8 @@ function navigateLeft() {
     // Play animation of small icons
     rotateSmallIconsLeft.restart();
 
-    for (let i = 0; i < blueDeck.length; i++) {
-        const card = blueDeck[i];
+    for (let i = 0; i < deck.length; i++) {
+        const card = deck[i];
 
         calculatedPosition = i+1+cardZeroPosition;
 
@@ -294,7 +294,7 @@ function navigateLeft() {
 // Reset cards opacity to 1 after 0.2 seconds
 function resetOpacity() {
     setTimeout(function() {
-    blueDeck.forEach((card) => {
+    deck.forEach((card) => {
         card.style.opacity = 1;
     });
     console.log('Opacity reset');
@@ -310,8 +310,8 @@ window.addEventListener('mousemove', (event) => {
 });
 
 // Add custom cursor when hovering on cards
-for (let i = 0; i < blueDeck.length; i++) {
-    const card = blueDeck[i];
+for (let i = 0; i < deck.length; i++) {
+    const card = deck[i];
 
     // Add a hover event listener to each card
     card.addEventListener('mouseover', function hoverOnCard() {
@@ -431,10 +431,10 @@ var logoAnimation = bodymovin.loadAnimation({
     renderer: 'svg',
     loop: true,
     autoplay: false,
-    path: 'res/logo/animatedLogo_puntoColorato.json'
+    path: '../res/logo/animatedLogo_puntoColorato.json'
 });
 
-// Stop the animation depending on the page name
+// Stop the logo animation depending on the page name
 var pageName = location.pathname.split("/").slice(-1)
 console.log(pageName);
 if (pageName == 'green-deck.html') {
