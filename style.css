@@ -287,7 +287,7 @@ h1 {
     font-family: 'PP Fragment', sans-serif;
     font-weight: 450;
     font-size: 35px;
-    line-height: 45px;
+    line-height: 45px; /* Interlinea */
     color: var(--dark-background);
     margin-bottom: 20px;
     margin: 0;
@@ -298,7 +298,7 @@ h2 {
     font-family: 'PP Fragment', sans-serif;
     font-weight: 310;
     font-size: 18px;
-    line-height: 29px;
+    line-height: 29px; /* Interlinea */
     color: var(--dark-background);
     margin-bottom: 20px;
     font-variation-settings: 'srff' 0;
