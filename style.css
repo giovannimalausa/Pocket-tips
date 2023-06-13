@@ -8,13 +8,13 @@
     --yellow-secondary: #FFFAEA;
 
     --green-primary: #72C0A2;
-    --green-secondary: #72C0A2;
+    --green-secondary: #F6FFFC;
 
     --red-primary: #ED6D44;
-    --red-secondary: #ED6D44;
+    --red-secondary: #FDF4EF;
 
     --pink-primary: #F3A0B9;
-    --pink-secondary: #F3A0B9;
+    --pink-secondary: #FFF3F8;
 
     --blue-primary: #4E7BBE;
     --blue-secondary: #F3F7FF;
@@ -294,7 +294,7 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     font-family: 'PP Fragment', sans-serif;
     font-weight: 450;
     font-size: 35px;
-    line-height: 45px; /* Interlinea */
+    line-height: 41px; /* Interlinea */
     color: var(--dark-background);
     margin-bottom: 20px;
     margin: 0;
