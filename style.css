@@ -456,13 +456,9 @@ h2 {
     height: 100%;
     display: flex;
     flex-direction: row;
+    /* background-color: var(--blue-primary); */
 }
 
 .left, .right {
-    background-color: #72C0A2;
     width: 50%;
-}
-
-.right {
-    background-color: red;
 }

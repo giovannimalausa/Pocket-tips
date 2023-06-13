@@ -15,6 +15,7 @@ let redCard = document.querySelector(".red-single-card-wrapper");
 let pinkCard = document.querySelector(".pink-single-card-wrapper");
 
 let blueCardNoLabel = document.querySelector(".blue-card.cover.main-cover");
+let greenCardNoLabel = document.querySelector(".green-card.cover.main-cover");
 
 // Definizione array contenente le "MAIN CARDS"
 const mainCards_blue = [blueCard, yellowCard, greenCard, redCard, pinkCard];
@@ -271,12 +272,13 @@ function centerFan() {
 // Le card extra spariscono
 function hideExtraCards() {
     extraCards.forEach(function(card) {
-        card.style.opacity = "0";
+        card.style.display = "none";
     });
 }
 
 // Funzione che distribuisce le carte a ventaglio nella pagina
 function distributeFan() {
+    console.log("Running distributeFan() function...");
     animationToCenterComplete = true;
     pink.play();
     red.play();
@@ -295,6 +297,11 @@ function distributeFan() {
 function enableMouse() {
     document.body.style.pointerEvents = 'all';
     console.log('Mouse enabled');
+}
+
+function disableMouse() {
+    document.body.style.pointerEvents = 'none';
+    console.log('Mouse disabled');
 }
 
 
@@ -339,10 +346,12 @@ let blueCatTitle = gsap.fromTo(".blue-cat-title", {
 
 // On BLUE over
 blueCard.addEventListener("mouseenter", function() {
-    enterBlue.play(); // Animazione card
-    rotateBlue.play(); // Animazione vettore blu
-    blueCatTitle.play(); // Animazione titolo
-    logoAnimation.goToAndStop(blueLogoKeyframe, true); // Animazione logo blu (stop)
+    if (overable === true) {
+        enterBlue.play(); // Animazione card
+        rotateBlue.play(); // Animazione vettore blu
+        blueCatTitle.play(); // Animazione titolo
+        logoAnimation.goToAndStop(blueLogoKeyframe, true); // Animazione logo blu (stop)
+    }
 });
 
 blueCard.addEventListener("mouseleave", function() {
@@ -397,46 +406,52 @@ yellowCard.addEventListener("mouseleave", function() {
 
 // GREEN
 
-// Green card rises
-let enterGreen = gsap.to(greenCard, {
-    paused: true,
-    y: '-='+Math.sin(40)*60, 
-    x: '-='+Math.cos(40)*60, 
-    duration: 0.3,
-    ease: "power3",
-})
+    // Green card rises
+    let enterGreen = gsap.to(greenCard, {
+        paused: true,
+        y: '-='+Math.sin(40)*60, 
+        x: '-='+Math.cos(40)*60, 
+        duration: 0.3,
+        ease: "power3",
+    })
 
-// Green vector rotates
-let rotateGreen = gsap.to(".green-vector", { // Animazione vettore blu
-    paused: true,
-    rotate: angoloRotazione,
-    duration: 0.4,
-})
+    // Green vector rotates
+    let rotateGreen = gsap.to(".green-vector", { // Animazione vettore blu
+        paused: true,
+        rotate: angoloRotazione,
+        duration: 0.4,
+    })
 
-// green-cat-title slides out animation
-let greenCatTitle = gsap.fromTo(".green-cat-title", {
-    y: catTitleAnimationStartY,
-}, {
-    paused: true,
-    y: catTitleAnimationEndY,
-    duration: 0.2,
-    ease: "power3",
-})
+    // green-cat-title slides out animation
+    let greenCatTitle = gsap.fromTo(".green-cat-title", {
+        y: catTitleAnimationStartY,
+    }, {
+        paused: true,
+        y: catTitleAnimationEndY,
+        duration: 0.2,
+        ease: "power3",
+    })
 
-// On GREEN over (event listeners)
-greenCard.addEventListener("mouseenter", function() {
-    enterGreen.play();
-    rotateGreen.play();
-    greenCatTitle.play();
-    logoAnimation.goToAndStop(greenLogoKeyframe, true); // Animazione logo verde (stop)
-});
+    // On GREEN over (event listeners)
+    greenCard.addEventListener("mouseenter", function() {
+        if (overable === true) {
+            enterGreen.play();
+            rotateGreen.play();
+            greenCatTitle.play();
+            logoAnimation.goToAndStop(greenLogoKeyframe, true); // Animazione logo verde (stop)
+        }
+    });
 
-greenCard.addEventListener("mouseleave", function() {
-    enterGreen.reverse();
-    rotateGreen.reverse();
-    greenCatTitle.reverse();
-    logoAnimation.play(); 
-});
+    greenCard.addEventListener("mouseleave", function() {
+        if (overable === true) {
+            enterGreen.reverse();
+            rotateGreen.reverse();
+            greenCatTitle.reverse();
+            logoAnimation.play(); 
+        }
+    });
+
+
 
 // RED
 
@@ -550,7 +565,7 @@ blueCard.addEventListener("click", function() {
         duration: 1,
         ease: "back",
         paused: true,
-        onComplete: goToPage,
+        onComplete: goToPage("blue"),
     })
 
     let blueCatTitle = document.querySelector(".blue-cat-title");
@@ -575,10 +590,68 @@ blueCard.addEventListener("click", function() {
     blueCatTitleAnimation.play();
 });
 
-function goToPage() {
+greenCard.addEventListener("click", function() {
+    console.log("Green was clicked.")
+    overable = false;
+    // disableMouse();
 
-    setTimeout(window.location.href = "blue-deck.html", 1000);
+    let greenClicked = gsap.to([pinkCard, redCard, yellowCard, blueCard], {
+        opacity: 0,
+        y: 9000,
+        paused: true,
+        duration: 2,
+    })
+
+    let greenResetPosition = gsap.to(greenCard, {
+        y: -125,
+        x: center_X,
+        rotate: 0,
+        duration: 1,
+        paused: true,
+    })
+
+    let greenScaleUp = gsap.to(greenCardNoLabel, {
+        scale: 1.25,
+        y: 125,
+        duration: 1,
+        ease: "back",
+        paused: true,
+        onComplete: goToPage("green"),
+    })
+
+    let greenCatTitle = document.querySelector(".green-cat-title");
+    let greenCatTitleAnimation = gsap.to(greenCatTitle, {
+        color: "#4E7BBE",
+        'font-size': '130px',
+        'font-variation-settings': "'srff' 0, 'wght' 550",
+        opacity: .2,
+        y: -175, // questo è il risultato di un conto del cazzo -300 + 125 = -175
+        margin: 0,
+        duration: .8,
+        ease: "back",
+        paused: true,
+        onComplete: d => {console.log("Animation completed.")}
+    })
+
+    greenClicked.play();
+    greenScaleUp.play();
+    greenResetPosition.play();
+    greenCatTitleAnimation.play();
+});
+
+function goToPage(color) {
+
     console.log("Cambio pagina")
+    setTimeout(() => {
+        if (color === "green") {
+            console.log("Navigate to green.")
+            window.location.href = "green-deck.html";
+        } else if (color === "blue") {
+            console.log("Navigate to blue.")
+            window.location.href = "blue-deck.html";
+        }
+    },
+    2000);
 }
 
 // Logo animation

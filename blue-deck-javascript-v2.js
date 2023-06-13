@@ -434,8 +434,25 @@ var logoAnimation = bodymovin.loadAnimation({
     path: 'res/logo/animatedLogo_puntoColorato.json'
 });
 
-// Stop the animation on blueLogoKeyframe
-logoAnimation.goToAndStop(blueLogoKeyframe, true);
+// Stop the animation depending on the page name
+var pageName = location.pathname.split("/").slice(-1)
+console.log(pageName);
+if (pageName == 'green-deck.html') {
+    // Stop the animation on greenLogoKeyframe
+    logoAnimation.goToAndStop(greenLogoKeyframe, true);
+} else if (pageName == 'pink-deck.html') {
+    // Stop the animation on pinkLogoKeyframe
+    logoAnimation.goToAndStop(pinkLogoKeyframe, true);
+} else if (pageName == 'yellow-deck.html') {
+    // Stop the animation on yellowLogoKeyframe
+    logoAnimation.goToAndStop(yellowLogoKeyframe, true);
+} else if (pageName == 'red-deck.html') {
+    // Stop the animation on redLogoKeyframe
+    logoAnimation.goToAndStop(redLogoKeyframe, true);
+} else if (pageName == 'blue-deck.html') {
+    // Stop the animation on blueLogoKeyframe
+    logoAnimation.goToAndStop(blueLogoKeyframe, true);
+}
 
 // Menu animation
 menuButton.addEventListener('click', function() {
