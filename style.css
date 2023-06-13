@@ -418,6 +418,22 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     background-color: var(--blue-secondary);
 }
 
+.green-card .face-wrapper {
+    background-color: var(--green-secondary);
+}
+
+.red-card .face-wrapper {
+    background-color: var(--red-secondary);
+}
+
+.yellow-card .face-wrapper {
+    background-color: var(--yellow-secondary);
+}
+
+.pink-card .face-wrapper h1 {
+    color: var(--pink-secondary);
+}
+
 /* 
 Qua c'è il CSS per la fullpage
 
