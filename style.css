@@ -253,16 +253,16 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     display: none;
 }
 
-.blue-section.wrapper {
+.section.wrapper {
     width: 100vw;
 }
 
-.blue-section .card {
+.section .card {
     position: absolute;
     scale: 1;
 }
 
-.blue-section .selected-card {
+.selected-card {
     scale: 1.25;
     z-index: 35;
 }

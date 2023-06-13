@@ -52,14 +52,8 @@ if( $my_custom_query->have_posts() ):
 
             <?php the_title()?>
 
-            <?php endwhile; endif;>
+<?php endwhile; endif;>
     
-          
-        </div>
-
-    </div>
-
-    <div class="curtain"></div>
 
     <!-- Anime.js 
     <script src="anime.min.js"></script>

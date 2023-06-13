@@ -537,16 +537,20 @@ let pinkCatTitle = gsap.fromTo(".pink-cat-title", {
 
 // On PINK over (event listeners)
 pinkCard.addEventListener("mouseenter", function() {
-    enterPink.play();
-    rotatePink.play();
-    pinkCatTitle.play();
-    logoAnimation.goToAndStop(pinkLogoKeyframe, true); // Animazione logo pink (stop)
+    if (overable === true) {
+        enterPink.play();
+        rotatePink.play();
+        pinkCatTitle.play();
+        logoAnimation.goToAndStop(pinkLogoKeyframe, true); // Animazione logo pink (stop)
+    }
 });
 pinkCard.addEventListener("mouseleave", function() {
-    enterPink.reverse();
-    rotatePink.reverse();
-    pinkCatTitle.reverse();
-    logoAnimation.play(); 
+    if (overable === true) {
+        enterPink.reverse();
+        rotatePink.reverse();
+        pinkCatTitle.reverse();
+        logoAnimation.play(); 
+    }
 });
 
 
@@ -631,7 +635,7 @@ yellowCard.addEventListener("click", function() {
         duration: 1,
         ease: "back",
         paused: true,
-        onComplete: goToPage("blue"),
+        onComplete: goToPage("yellow"),
     })
 
     let yellowCatTitle = document.querySelector(".yellow-cat-title");
@@ -761,6 +765,58 @@ redCard.addEventListener("click", function() {
     redCatTitleAnimation.play();
 });
 
+// Click on pink category
+
+pinkCard.addEventListener("click", function() {
+    console.log("Pink was clicked.")
+    overable = false;
+    // disableMouse();
+
+    let pinkClicked = gsap.to([redCard, greenCard, yellowCard, blueCard], {
+        opacity: 0,
+        y: 9000,
+        paused: true,
+        duration: 2,
+    })
+
+    let pinkResetPosition = gsap.to(pinkCard, {
+        y: -125,
+        x: center_X,
+        rotate: 0,
+        duration: 1.2,
+        paused: true,
+        ease: "back",
+    })
+
+    let pinkScaleUp = gsap.to(pinkCardNoLabel, {
+        scale: 1.25,
+        y: 125,
+        duration: .8,
+        ease: "back",
+        paused: true,
+        onComplete: goToPage("red"),
+    })
+
+    let pinkCatTitle = document.querySelector(".pink-cat-title");
+    let pinkCatTitleAnimation = gsap.to(pinkCatTitle, {
+        color: "#F3A0B9",
+        'font-size': '130px',
+        'font-variation-settings': "'srff' 0, 'wght' 550",
+        opacity: .2,
+        y: -175, // questo è il risultato di un conto del cazzo -300 + 125 = -175
+        margin: 0,
+        duration: .8,
+        ease: "back",
+        paused: true,
+        onComplete: d => {console.log("Animation completed.")}
+    })
+
+    pinkClicked.play();
+    pinkScaleUp.play();
+    pinkResetPosition.play();
+    pinkCatTitleAnimation.play();
+});
+
 function goToPage(color) {
 
     console.log("Cambio pagina")
@@ -773,7 +829,7 @@ function goToPage(color) {
             window.location.href = "yellow-deck.html";
         } else if (color === "green") {
             console.log("Navigate to green.")
-            window.location.href = "/decks/green-deck.html";
+            window.location.href = "green-deck.html";
         } else if (color === "red") {
             console.log("Navigate to red.")
             window.location.href = "red-deck.html";
