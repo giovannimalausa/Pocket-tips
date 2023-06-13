@@ -5,7 +5,7 @@
     /* --light-background: #F5EDE0; */
 
     --yellow-primary: #F2BE58;
-    --yellow-secondary: #F2BE58;
+    --yellow-secondary: #FFFAEA;
 
     --green-primary: #72C0A2;
     --green-secondary: #72C0A2;
@@ -411,6 +411,46 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
 .blue-card .face-wrapper {
     background-color: var(--blue-secondary);
 }
+
+/* 
+Qua c'è il CSS per la fullpage
+
+FFFF  U   U  L     L     PPPP    AA    GGG   EEEE 
+F     U   U  L     L     P   P  A  A  G      E    
+FFF   U   U  L     L     PPPP   AAAA  G  GG  EEE  
+F     U   U  L     L     P      A  A  G   G  E    
+F      UUU   LLLL  LLLL  P      A  A   GGG   EEEE                         
+
+*/
+
+.yellow-fullpage {
+    background-color: var(--yellow-secondary);
+}
+
+.yellow-fullpage > * .menu-button {
+    color: var(--dark-background);
+}
+
+.blue-fullpage {
+    background-color: var(--blue-secondary);
+}
+
+.red-fullpage {
+    background-color: var(--red-secondary);
+}
+
+.green-fullpage {
+    background-color: var(--green-secondary);
+}
+
+.pink-fullpage {
+    background-color: var(--pink-secondary);
+}
+
+.fullpage-container {
+    display: flex;
+}
+
 
 /*
    M   M  EEEE  N   N  U   U 
