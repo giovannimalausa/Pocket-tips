@@ -298,7 +298,7 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     font-family: 'PP Fragment', sans-serif;
     font-weight: 310;
     font-size: 18px;
-    line-height: 29px; /* Interlinea */
+    line-height: 23px; /* Interlinea */
     color: var(--dark-background);
     margin-bottom: 20px;
     font-variation-settings: 'srff' 0;
