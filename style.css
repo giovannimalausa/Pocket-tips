@@ -283,7 +283,7 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     opacity: 0;
 }
 
-h1 {
+.card > * h1 {
     font-family: 'PP Fragment', sans-serif;
     font-weight: 450;
     font-size: 35px;
@@ -294,7 +294,7 @@ h1 {
     font-variation-settings: 'srff' 74;
 }
 
-h2 {
+.card > * h2 {
     font-family: 'PP Fragment', sans-serif;
     font-weight: 310;
     font-size: 18px;
