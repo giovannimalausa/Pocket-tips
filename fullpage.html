@@ -5,27 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Full card | Pocket-tips</title>
-    <link rel="stylesheet" href="fullcard-style.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.0/lottie.min.js"></script>
 </head>
-<body>
-    <header>
-        <img src="res/logo/blu.svg" class="logo" alt="logo">
-        <svg width="61" height="58" viewBox="0 0 61 58" xmlns="http://www.w3.org/2000/svg">
-            <path d="M30.8101 0L37.6144 13.1912L52.1561 8.4213L47.1822 22.3033L60.9984 28.7508L47.1822 35.1984L52.1561 49.0804L37.6144 44.3105L30.8101 57.4688L24.04 44.3105L9.49862 49.0804L14.4725 35.1984L0.65625 28.7508L14.4725 22.3033L9.49862 8.4213L24.04 13.1912L30.8101 0Z"/>
-        </svg>
-    </header>
-    <section>
+<body class="yellow-fullpage">
+    <div class="barraInAlto">
+        <a href="index.html">
+            <img src="res/logo/yellow-logo-dark.svg" alt="">
+            <!-- <div class="animatedLogoContainer" id="animatedLogoContainer"></div> -->
+        </a>
+
+        <a href="#" class="menu-button">menu</a>
+    </div>
+
+    <section class="fullpage-container">
         <!-- Grid -->
         <div class="grid">
             <div class="text">
                 <div class="article-header">
-                    <div class="icon">
-                        <img src="res/blue-deck/WeTransfer-Icon.png" alt="">
-                    </div>
-                    <div class="title-holder">
-                        <h3>Sharing is Caring</h3>
-                        <h1>→ WeTransfer</h1>
-                    </div>
+                    <h3>Sharing is Caring</h3>
+                    <h1>→ WeTransfer</h1>
                 </div>
                 <div class="tags-container">
                     <p class="tag">Opzione gratuita</p>
@@ -68,5 +67,20 @@
             
     </footer>
 
+    <!-- GREENSOCK -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/Flip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/Observer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/Draggable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/EaselPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/MotionPathPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/PixiPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/TextPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/EasePack.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/CustomEase.min.js"></script>
+    <!-- SCRIPT -->
+    <script src="fullpage.js"></script>
 </body>
 </html>
