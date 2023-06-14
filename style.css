@@ -298,7 +298,7 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     color: var(--dark-background);
     margin-bottom: 20px;
     margin: 0;
-    font-variation-settings: 'SRFF' 100, 'wght' 550;
+    font-variation-settings: 'SRFF' 74, 'wght' 550;
 }
 
 .card > * h2 {
