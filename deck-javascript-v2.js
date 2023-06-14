@@ -214,7 +214,7 @@ function navigateRight() {
             gsap.to(card, {
                 opacity: 0,
                 duration: 0.1,
-                onComplete: resetOpacity,
+                // onComplete: resetOpacity,
             })
         }
 
@@ -292,7 +292,7 @@ function navigateLeft() {
             gsap.to(card, {
                 opacity: 0,
                 duration: 0.1,
-                onComplete: resetOpacity,
+                // onComplete: resetOpacity,
                 })
         }
 
