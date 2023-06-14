@@ -118,8 +118,7 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
 .cat-title {
     position: absolute;
     font-family: 'PP Fragment Variable', sans-serif;
-    font-variation-settings: 'srff' 0, 'wght' 550;
-    font-weight: 400;
+    font-variation-settings: 'srff' 0, 'wght' 250;
     color: #FFFFFF;
     font-size: 40px;
     transition: color 0.5s ease-in-out;

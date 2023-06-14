@@ -72,6 +72,19 @@ function showCards() {
             duration: 1,
             ease: 'back',
         })
+
+        // change opacity of cards with i = 2 or 5
+        if (i === 2 || i === 5) {
+            gsap.to(card, {
+                opacity: 0.4,
+                duration: 0.5,
+            })
+        } else { // reset opacity of other cards to 1
+            gsap.to(card, {
+                opacity: 1,
+                duration: 0.5,
+            })
+        }
     }
     document.body.style.pointerEvents = 'all';
     console.log('Mouse unlocked');
@@ -218,6 +231,21 @@ function navigateRight() {
             })
         }
 
+        // change opacity of cards with calculatedPosition = 2 or 5 & ≠ 3
+        if (calculatedPosition === 2 || calculatedPosition === 5 && calculatedPosition !== 3) {
+            gsap.to(card, {
+                opacity: 0.4,
+                duration: 0.5,
+                ease: 'power1.inOut'
+            })
+        } else if (calculatedPosition !== 3) { // reset opacity of other cards (with calculatedPosition ≠3) to 1
+            gsap.to(card, {
+                opacity: 1,
+                duration: 0.5,
+                ease: 'power1.inOut'
+            })
+        }
+
         console.log("i = " + i + ", calculatedPosition = "+calculatedPosition);
     }
     cardZeroPosition -=1;
@@ -266,6 +294,21 @@ function navigateLeft() {
                 duration: 0.1,
                 onComplete: resetOpacity,
                 })
+        }
+
+        // change opacity of cards with calculatedPosition = 2 or 5 & ≠ 4
+        if (calculatedPosition === 2 || calculatedPosition === 5 && calculatedPosition !== 4) {
+            gsap.to(card, {
+                opacity: 0.4,
+                duration: 0.5,
+                ease: 'power1.inOut'
+            })
+        } else if (calculatedPosition !== 4) { // reset opacity of other cards (with calculatedPosition ≠4) to 1
+            gsap.to(card, {
+                opacity: 1,
+                duration: 0.5,
+                ease: 'power1.inOut'
+            })
         }
 
         // Scale up card with calculatedPosition = 0, else scale down to 1x
