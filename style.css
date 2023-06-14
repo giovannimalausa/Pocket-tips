@@ -27,11 +27,12 @@
 
     /* Card variables */
     --card-border-radius: 40px;
+}
 
-    @font-face {
-        font-family: 'PP Fragment Variable';
-        src: url(font/PPFragment-Variable.ttf);
-    }
+@font-face {
+    font-family: 'PP Fragment Variable';
+    src: url(font/PPFragment-Variable.ttf);
+    font-weight: 100 900;
 }
 
 html {
@@ -73,6 +74,7 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     padding: 74px 90px;
     justify-content: space-between;
     width: 100vw;
+    align-items: center;
 }
 
 .animatedLogoContainer {
@@ -83,11 +85,10 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
 
 .menu-button {
     font-family: 'PP Fragment', sans-serif;
-    font-weight: 450;
     color: var(--light-background);
     text-decoration: none;
     font-size: 18px;
-    font-variation-settings: 'srff' 0;
+    font-variation-settings: 'srff' 0, 'wght' 450;
     opacity: 0;
 }
 
@@ -116,7 +117,8 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
 /* Titolo della categoria nella visualizzazione a ventaglio */
 .cat-title {
     position: absolute;
-    font-family: 'PP Fragment', sans-serif;
+    font-family: 'PP Fragment Variable', sans-serif;
+    font-variation-settings: 'srff' 0, 'wght' 550;
     font-weight: 400;
     color: #FFFFFF;
     font-size: 40px;
@@ -158,9 +160,9 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
 
 /* Testo del Nome categoria  */
 .nome-categoria > * {
-    font-family: 'PP Fragment', sans-serif;
+    font-family: 'PP Fragment Variable';
     font-size: 130px;
-    font-variation-settings: 'srff' 0, 'wght' 550;
+    font-variation-settings: "wght" 550, "ital" 0, "SRFF" 0;
     transform: translateY(-300px);
     opacity: 0.2;
     pointer-events: none;
@@ -291,24 +293,23 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
 }
 
 .card > * h1 {
-    font-family: 'PP Fragment', sans-serif;
-    font-weight: 450;
+    font-family: 'PP Fragment Variable';
     font-size: 35px;
     line-height: 41px; /* Interlinea */
     color: var(--dark-background);
     margin-bottom: 20px;
     margin: 0;
-    font-variation-settings: 'srff' 74;
+    font-variation-settings: 'srff' 50, 'wght' 550;
 }
 
 .card > * h2 {
-    font-family: 'PP Fragment', sans-serif;
+    font-family: 'PP Fragment Variable';
     margin: 0;
     font-weight: 310;
     font-size: 18px;
     line-height: 23px; /* Interlinea */
     color: var(--dark-background);
-    font-variation-settings: 'srff' 0;
+    font-variation-settings: 'SRFF' 0;
 }
 
 .title-icon-wrapper {
