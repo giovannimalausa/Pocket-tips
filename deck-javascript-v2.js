@@ -54,6 +54,7 @@ let smallIcons = document.querySelectorAll('.small-icon');
 let cursor = document.getElementById('cursor');
 let cursorRight = document.querySelector('.cursor-right');
 let cursorLeft = document.querySelector('.cursor-left');
+let cursorCat = document.querySelector('.cursor-cat');
 
 // Shows cards on load
 function showCards() {
@@ -235,15 +236,27 @@ function navigateRight() {
         if (calculatedPosition === 2 || calculatedPosition === 5 && calculatedPosition !== 3) {
             gsap.to(card, {
                 opacity: 0.4,
-                duration: 0.5,
-                ease: 'power1.inOut'
+                duration: 1,
+                ease: 'power3'
             })
         } else if (calculatedPosition !== 3) { // reset opacity of other cards (with calculatedPosition ≠3) to 1
             gsap.to(card, {
                 opacity: 1,
-                duration: 0.5,
-                ease: 'power1.inOut'
+                duration: 1,
+                ease: 'power3'
             })
+        }
+
+        // Add class "cliccabile" to cards with calculatedPosition = 6, 0 or 1
+        if (calculatedPosition === 6 || calculatedPosition === 0 || calculatedPosition === 1) {
+            card.classList.add('cliccabile');
+            card.classList.remove('avanza');
+        } else if (calculatedPosition === 2) {
+            card.classList.remove('cliccabile');
+            card.classList.add('avanza');
+        } else { // Remove class from other cards
+            card.classList.remove('cliccabile');
+            card.classList.remove('avanza');
         }
 
         console.log("i = " + i + ", calculatedPosition = "+calculatedPosition);
@@ -311,6 +324,13 @@ function navigateLeft() {
             })
         }
 
+        // Add class "cliccabile" to cards with calculatedPosition = 6, 0 or 1
+        if (calculatedPosition === 6 || calculatedPosition === 0 || calculatedPosition === 1) {
+            card.classList.add('cliccabile');
+        } else { // Remove class from other cards
+            card.classList.remove('cliccabile');
+        }
+
         // Scale up card with calculatedPosition = 0, else scale down to 1x
         if (calculatedPosition === 0) {
             gsap.to(card, {
@@ -367,24 +387,42 @@ for (let i = 0; i < deck.length; i++) {
         const startIndex = transformPropertyofClickedElement.indexOf("translate(") + 10; // Adding 10 to skip "translate("
         const endIndex = transformPropertyofClickedElement.indexOf("vw", startIndex);
         const translateX = parseFloat(transformPropertyofClickedElement.slice(startIndex, endIndex));
-        
-        
-        console.log('TranslateX of hovered card is = ' + translateX);
-        if (translateX > 0) {
+
+        // Manage cursors looking at card class list
+        if (this.classList.contains('cliccabile')) {
             cursor.style.opacity = 1;
-            // Show right cursor
-            cursorRight.style.display = 'block';
+            // Hide cat cursor
+            cursorCat.style.display = 'block';
             // Hide left cursor
             cursorLeft.style.display = 'none';
-            
-            
-        } else if (translateX < 0) {
+            // Hide right cursor
+            cursorRight.style.display = 'none';
+        } else if (this.classList.contains('avanza')) {
             cursor.style.opacity = 1;
-            // Show left cursor
+            // Hide cat cursor
+            cursorCat.style.display = 'none';
+            // Hide left cursor
+            cursorLeft.style.display = 'none';
+            // Hide right cursor
+            cursorRight.style.display = 'block';
+        } else if (this.classList.contains('precedente')) {
+            cursor.style.opacity = 1;
+            // Hide cat cursor
+            cursorCat.style.display = 'none';
+            // Hide left cursor
             cursorLeft.style.display = 'block';
             // Hide right cursor
             cursorRight.style.display = 'none';
-        }
+        } else if (!this.classList.contains('cliccabile') && !this.classList.contains('avanza') && !this.classList.contains('precedente')) {
+            cursor.style.opacity = 1;
+            // Hide cat cursor
+            cursorCat.style.display = 'none';
+            // Hide left cursor
+            cursorLeft.style.display = 'none';
+            // Hide right cursor
+            cursorRight.style.display = 'none';
+        } 
+
     });
 }
 

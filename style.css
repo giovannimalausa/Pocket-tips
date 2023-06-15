@@ -112,7 +112,7 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     color: white;
     text-decoration: none;
     font-size: 18px;
-    font-variation-settings: 'srff' 0, 'wght' 450;
+    font-variation-settings: 'SRFF' 0, 'wght' 450;
     opacity: 0;
 }
 
@@ -438,6 +438,19 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     height: 100%;
 }
 
+.cursor-cat {
+    width: fit-content;
+    height: fit-content;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 8px;
+    background-color: var(--blue-primary);
+    color: white;
+    font-family: 'PP Fragment Variable';
+    font-size: 35px;
+    transform: translateX(-25%);
+}
+
 .blue-card .face-wrapper {
     background-color: var(--blue-secondary);
 }
@@ -457,6 +470,19 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
 .pink-card .face-wrapper h1 {
     color: var(--pink-secondary);
 }
+
+.cliccabile {
+    cursor: pointer;
+}
+
+.avanza {
+    cursor: pointer;
+}
+
+.cliccabile {
+    cursor: pointer;
+}
+
 
 /* 
 Qua c'è il CSS per la fullpage
