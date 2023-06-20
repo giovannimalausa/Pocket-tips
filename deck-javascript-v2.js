@@ -108,26 +108,21 @@ function showMenuButton() {
 }
 showMenuButton();
 
-
+// Defining what happens when clicking on cards
 for (let i = 0; i < deck.length; i++) {
     const card = deck[i];
 
     // Add a click event listener to each card
     card.addEventListener('click', function clickOnCard() {
-        console.log('Clicked on card with transform = ' + this.style.transform);
-        let transformPropertyofClickedElement = this.style.transform;
-        // Isolate the first number in the transform property of the clicked element, which is the translateX value
-        const regex = /translate\((.*?)vw/g;
-        const match = regex.exec(transformPropertyofClickedElement);
-        const translateX = match ? match[1] : null;
-        
-        console.log('TranslateX of clicked card is = ' + translateX);
-        if (translateX > 0) {
+        if (card.classList.contains('cliccabile')) {
+            console.log("Opening card...");
+            window.alert("Qui si passerà alla pagina di contenuto fatta con Elementor, yeee 😆🔫");
+        } else if (card.classList.contains('avanza')) {
+            console.log("Clicked on the rightmost visibile Card -> Runinng navigateRight()...");
             navigateRight();
-        } else if (translateX < 0) {
+        } else if (card.classList.contains('retrocedi')) {
+            console.log("Clicked on the leftmost visibile Card -> Runinng navigateLeft()...");
             navigateLeft();
-        } else {
-            console.log('Clicked on center card');
         }
     });
 };
@@ -247,17 +242,8 @@ function navigateRight() {
             })
         }
 
-        // Add class "cliccabile" to cards with calculatedPosition = 6, 0 or 1
-        if (calculatedPosition === 6 || calculatedPosition === 0 || calculatedPosition === 1) {
-            card.classList.add('cliccabile');
-            card.classList.remove('avanza');
-        } else if (calculatedPosition === 2) {
-            card.classList.remove('cliccabile');
-            card.classList.add('avanza');
-        } else { // Remove class from other cards
-            card.classList.remove('cliccabile');
-            card.classList.remove('avanza');
-        }
+        // Setting the classes for the managing the cursors on hover
+        setHoveringClasses(card, calculatedPosition);
 
         console.log("i = " + i + ", calculatedPosition = "+calculatedPosition);
     }
@@ -267,6 +253,27 @@ function navigateRight() {
         cardZeroPosition = 0;
     }
     console.log("cardZeroPosition = "+cardZeroPosition);
+}
+
+function setHoveringClasses(card, calculatedPosition) {
+    // Add class "cliccabile" to cards with calculatedPosition = 6, 0 or 1
+    if (calculatedPosition === 6 || calculatedPosition === 0 || calculatedPosition === 1) {
+        card.classList.add('cliccabile');
+        card.classList.remove('avanza');
+    } else if (calculatedPosition === 2) {
+        card.classList.remove('cliccabile');
+        card.classList.remove('retrocedi');
+        card.classList.add('avanza');
+        console.log("Add class 'avanza' to card with calculatedPosition = 2");
+    } else if (calculatedPosition === 5) {
+        card.classList.remove('cliccabile');
+        card.classList.remove('avanza');
+        card.classList.add('retrocedi');
+        console.log("Add class 'retrocedi' to card with calculatedPosition = 5");
+
+    } else { // Remove class from other cards
+        card.classList.remove('cliccabile');
+    }
 }
 
 // Click on the left button to navigate left
@@ -343,7 +350,10 @@ function navigateLeft() {
                 duration: 0.3,
             })
         }
-            
+        
+        // Setting the classes for the managing the cursors on hover
+        setHoveringClasses(card, calculatedPosition);
+
         console.log("i = " + i + ", calculatedPosition = "+calculatedPosition);
     }
     cardZeroPosition +=1;
@@ -380,15 +390,8 @@ for (let i = 0; i < deck.length; i++) {
     card.addEventListener('mouseover', function hoverOnCard() {
         console.log('Hover on card');
         cursor.style.opacity = 1;
-        
-        console.log('Hovering on card with transform = ' + this.style.transform);
-        let transformPropertyofClickedElement = this.style.transform;
 
-        const startIndex = transformPropertyofClickedElement.indexOf("translate(") + 10; // Adding 10 to skip "translate("
-        const endIndex = transformPropertyofClickedElement.indexOf("vw", startIndex);
-        const translateX = parseFloat(transformPropertyofClickedElement.slice(startIndex, endIndex));
-
-        // Manage cursors looking at card class list
+        // Manage cursors by looking at card class list
         if (this.classList.contains('cliccabile')) {
             cursor.style.opacity = 1;
             // Hide cat cursor
@@ -405,7 +408,7 @@ for (let i = 0; i < deck.length; i++) {
             cursorLeft.style.display = 'none';
             // Hide right cursor
             cursorRight.style.display = 'block';
-        } else if (this.classList.contains('precedente')) {
+        } else if (this.classList.contains('retrocedi')) {
             cursor.style.opacity = 1;
             // Hide cat cursor
             cursorCat.style.display = 'none';
@@ -413,7 +416,7 @@ for (let i = 0; i < deck.length; i++) {
             cursorLeft.style.display = 'block';
             // Hide right cursor
             cursorRight.style.display = 'none';
-        } else if (!this.classList.contains('cliccabile') && !this.classList.contains('avanza') && !this.classList.contains('precedente')) {
+        } else if (!this.classList.contains('cliccabile') && !this.classList.contains('avanza') && !this.classList.contains('retrocedi')) {
             cursor.style.opacity = 1;
             // Hide cat cursor
             cursorCat.style.display = 'none';
@@ -443,6 +446,8 @@ rightSpace.addEventListener('mouseover', function hoverOnRightSpace() {
     cursorRight.style.display = 'block';
     // Hide left cursor
     cursorLeft.style.display = 'none';
+    // Hide cursor cat
+    cursorCat.style.display = 'none';
 });
 rightSpace.addEventListener('click', navigateRight);
 
@@ -454,6 +459,8 @@ leftSpace.addEventListener('mouseover', function hoverOnLeftSpace() {
     cursorLeft.style.display = 'block';
     // Hide right cursor
     cursorRight.style.display = 'none';
+    // Hide cursor cat
+    cursorCat.style.display = 'none';
 });
 leftSpace.addEventListener('click', navigateLeft);
 

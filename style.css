@@ -317,8 +317,8 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
 
 .card > * h1 {
     font-family: 'PP Fragment Variable';
-    font-size: 35px;
-    line-height: 41px; /* Interlinea */
+    font-size: 38px;
+    line-height: 46px; /* Interlinea */
     color: var(--dark-background);
     margin-bottom: 20px;
     margin: 0;
@@ -451,6 +451,23 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     transform: translateX(-25%);
 }
 
+.green-cursor.cursor-cat {
+    background-color: var(--green-primary);
+}
+.blue-cursor.cursor-cat {
+    background-color: var(--blue-primary);
+}
+.pink-cursor.cursor-cat {
+    background-color: var(--pink-primary);
+}
+.red-cursor.cursor-cat {
+    background-color: var(--red-primary);
+}
+.yellow-cursor.cursor-cat {
+    background-color: var(--yellow-primary);
+}
+
+
 .blue-card .face-wrapper {
     background-color: var(--blue-secondary);
 }
@@ -467,20 +484,16 @@ body::-webkit-scrollbar { /* Hide scroll bar in Safari, Chrome, Opera */
     background-color: var(--yellow-secondary);
 }
 
-.pink-card .face-wrapper h1 {
-    color: var(--pink-secondary);
-}
-
 .cliccabile {
-    cursor: pointer;
+    cursor: none;
 }
 
 .avanza {
-    cursor: pointer;
+    cursor: none;
 }
 
 .cliccabile {
-    cursor: pointer;
+    cursor: none;
 }
 
 

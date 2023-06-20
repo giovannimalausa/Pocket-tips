@@ -794,7 +794,7 @@ pinkCard.addEventListener("click", function() {
         duration: .8,
         ease: "back",
         paused: true,
-        onComplete: goToPage("red"),
+        onComplete: goToPage("pink"),
     })
 
     let pinkCatTitle = document.querySelector(".pink-cat-title");
