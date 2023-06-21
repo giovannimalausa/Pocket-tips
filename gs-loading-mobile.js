@@ -13,7 +13,7 @@ $('.mazzo6 .blue-single-card-wrapper').addClass('previous');
 
 // Creating an array to store all +the cards
 const allCards = document.querySelectorAll(".single-card-wrapper");
-console.log(allCards.length);
+console.log("There are now", allCards.length, "cards in total.");
 
 // Creating an array to store the animations
 let cardsToWheelAnimations = [];
