@@ -50,7 +50,7 @@ for (var i = 0; i < allCards.length; i++) {
         // to = arrivo
         x: cardPositions[i].cardPosition_x,
         y: cardPositions[i].cardPosition_y,
-        rotate: cardPositions[i].cardAngle,
+        rotate: cardPositions[i].cardAngle + "_short",
         duration: 1,
         delay: 0.5,
         paused: true,
@@ -70,12 +70,8 @@ function playWheelAnimation() {
 
 // Function to play the wheel rotation animations
 function playRotateAnimation() {
-    // Play the animation
-    rotateWheelAnimations.forEach((animation) => {
-        animation.invalidate();
-        animation.restart();
-    });
-    positionVariation++;
+    // Flush previous animations from the array
+    rotateWheelAnimations = [];
 
     for (var i = 0; i < allCards.length; i++) {
         let j = i + positionVariation;
@@ -85,7 +81,7 @@ function playRotateAnimation() {
         let rotateWheelAnimation = gsap.to(allCards[i], {
             x: cardPositions[j].cardPosition_x,
             y: cardPositions[j].cardPosition_y,
-            rotate: cardPositions[j].cardAngle,
+            rotate: cardPositions[j].cardAngle+"_short",
             duration: 1,
             delay: 0,
             paused: true,
@@ -93,6 +89,15 @@ function playRotateAnimation() {
         // Push new animation to the array
         rotateWheelAnimations.push(rotateWheelAnimation);
     }
+    
+    // Play the animation
+    rotateWheelAnimations.forEach((animation) => {
+        animation.invalidate(); // invalidate the animation so reset the starting values to current ones
+        animation.restart();
+    });
+    
+    // Increase the position variation
+    positionVariation++;
 
 }
 
