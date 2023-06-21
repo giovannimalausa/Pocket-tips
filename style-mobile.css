@@ -53,7 +53,7 @@ body {
     padding: 0;
     pointer-events: none;
     overflow-x: hidden;
-    height: 2000px;
+    height: 100dvh;
     -ms-overflow-style: none;  /* Hide scroll bar in IE and Edge */
     scrollbar-width: none;  /* Hide scroll bar in Firefox */
 }
@@ -71,6 +71,8 @@ body {
     align-items: center;
     background-color: var(--dark-background);
     overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .wrapper > * {
@@ -92,6 +94,9 @@ body {
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    width: 195px; /* former 180px */
+    height: 290px;
+    pointer-events: all;
 }
 
 .card {
@@ -136,3 +141,35 @@ body {
     background-color: var(--blue-primary);
 }
 
+.catNamesWrapper {
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: 500vw;
+    overflow: hidden;
+    cursor: none;
+    top: 10vh;
+    left: 0vw;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.catNameContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.catName {
+    font-family: 'PP Fragment Variable';
+    font-size: 32px;
+    color: white;
+}
